@@ -22,7 +22,7 @@ class AddPlayers extends Component {
 
     addNewPlayer(name) {
         console.log('player created. adding player');
-        this.props.playerCreated({name});
+        this.props.playerCreated(name);
         this.closeAddNewPlayerModal();
     };
 

@@ -38,7 +38,7 @@ class AddExistingPlayer extends Component {
     }
 
     renderRow(player) {
-        return <PlayerListItem player={player}/>;
+        return <PlayerListItem playerAdded={addPlayerToRoster} deletePlayer={playerDeleted} player={player}/>;
     }
 
     render() {

@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Text, View, Modal, StyleSheet, ListView} from 'react-native';
 import {CardSection, Button, Card} from './common';
 import { connect } from 'react-redux';
-import { addPlayerToRoster, playerDeleted } from '../actions';
+import { addExistingPlayerToRoster, playerDeleted } from '../actions';
 import PlayerListItem from "./PlayerListItem";
 
 
@@ -38,7 +38,7 @@ class AddExistingPlayer extends Component {
     }
 
     renderRow(player) {
-        return <PlayerListItem playerAdded={addPlayerToRoster} deletePlayer={playerDeleted} player={player}/>;
+        return <PlayerListItem playerAdded={addExistingPlayerToRoster.bind(this)} deletePlayer={playerDeleted.bind(this)} player={player}/>;
     }
 
     render() {
@@ -93,4 +93,4 @@ const mapStateToProps = (state) => {
     return {roster: state.player.roster, playerList: state.player.playerList};
 };
 
-export default connect(mapStateToProps, {addPlayerToRoster, playerDeleted})(AddExistingPlayer);
+export default connect(mapStateToProps, {addExistingPlayerToRoster, playerDeleted})(AddExistingPlayer);

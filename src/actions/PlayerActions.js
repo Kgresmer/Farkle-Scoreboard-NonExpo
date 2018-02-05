@@ -1,4 +1,9 @@
-import {ADD_PLAYER, DROP_PLAYER, PLAYER_CREATED, PLAYER_DELETED} from "./types";
+import {
+    ADD_EXISTING_PLAYER,
+    DROP_PLAYER,
+    PLAYER_CREATED,
+    PLAYER_DELETED
+} from "./types";
 
 export const playerCreated = (name) => {
     return {
@@ -7,25 +12,25 @@ export const playerCreated = (name) => {
     };
 };
 
-export const playerDeleted = (name) => {
+export const playerDeleted = (id) => {
     return {
         type: PLAYER_DELETED,
-        payload: name
+        payload: id
     };
 };
 
-export const addPlayerToRoster = (name) => {
+export const addExistingPlayerToRoster = (player) => {
     return {
-        type: ADD_PLAYER,
-        payload: name
+        type: ADD_EXISTING_PLAYER,
+        payload: player
     };
 };
 
 
-export const removePlayerToRoster = (name) => {
+export const removePlayerToRoster = (id) => {
     return {
         type: DROP_PLAYER,
-        payload: name
+        payload: id
     };
 };
 

@@ -1,5 +1,4 @@
-import {ADD_PLAYER, DROP_PLAYER, PLAYER_CREATED, PLAYER_DELETED} from "../actions/types";
-import {REHYDRATE} from 'redux-persist/es/constants';
+import { ADD_EXISTING_PLAYER, DROP_PLAYER, PLAYER_CREATED, PLAYER_DELETED} from "../actions/types";
 
 const INITIAL_STATE = {
     playerList: [],
@@ -9,7 +8,7 @@ const INITIAL_STATE = {
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
         case PLAYER_CREATED:
-            console.log('create player' + state.roster);
+            console.log('create player');
             const newPlayer = {
                 id: 1,
                 name: action.payload,
@@ -18,6 +17,7 @@ export default (state = INITIAL_STATE, action) => {
                 bestScore: null,
                 worstScore: null
             };
+            console.log(newPlayer);
             return {
                 playerList: state.playerList.push(newPlayer),
                 roster: state.roster.push(newPlayer)
@@ -25,10 +25,10 @@ export default (state = INITIAL_STATE, action) => {
         case PLAYER_DELETED:
             console.log('delete player' + state.roster);
             const playerListIndex = state.playerList.find(player => {
-                return player.id = action.payload;
+                return player.id === action.payload;
             });
             const rosterIndex = state.roster.find(player => {
-                return player.id = action.payload;
+                return player.id === action.payload;
             });
             return {
                 playerList: state.playerList.splice(playerListIndex, 1),
@@ -38,7 +38,7 @@ export default (state = INITIAL_STATE, action) => {
             console.log('drop player' + state.roster);
             if (state.roster) {
                 const rosterIndexDrop = state.roster.find(player => {
-                    return player.id = action.payload;
+                    return player.id === action.payload;
                 });
 
                 return {
@@ -48,7 +48,7 @@ export default (state = INITIAL_STATE, action) => {
             } else {
                 return { ...state };
             }
-        case ADD_PLAYER:
+        case ADD_EXISTING_PLAYER:
             console.log('add player' + state.roster);
             return {
                 playerList: state.playerList,

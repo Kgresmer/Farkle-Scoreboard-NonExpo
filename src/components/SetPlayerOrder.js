@@ -16,7 +16,7 @@ class SetPlayerOrder extends Component {
     };
 
     componentWillMount() {
-
+        this.props.createInitialPlayerOrderList();
     }
 
     componentWillReceiveProps(nextProps) {

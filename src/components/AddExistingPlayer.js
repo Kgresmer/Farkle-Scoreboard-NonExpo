@@ -21,7 +21,6 @@ class AddExistingPlayer extends Component {
         this.createDataSource(this.props.playerList);
     }
 
-    // TODO may not be needed
     componentWillReceiveProps(nextProps) {
         this.createDataSource(nextProps.playerList);
     }

@@ -14,7 +14,8 @@ class AddPlayers extends Component {
         },
         headerTitleStyle: {
             color: 'white'
-        }
+        },
+        headerLeft: null
     };
 
     state = {showNewPlayerModal: false, showExistingPlayerModal: false};

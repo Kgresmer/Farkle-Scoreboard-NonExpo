@@ -10,6 +10,7 @@ const INITIAL_STATE = {
 };
 
 export default (state = INITIAL_STATE, action) => {
+    console.log(action);
     switch (action.type) {
         case PLAYER_CREATED:
             console.log('create player');
@@ -24,8 +25,8 @@ export default (state = INITIAL_STATE, action) => {
             state.playerList.push(newPlayer);
             state.roster.push(newPlayer);
             return {
-                playerList: state.playerList,
-                roster: state.roster
+                playerList: clone(state.playerList),
+                roster: clone(state.roster)
             };
         case PLAYER_DELETED:
             console.log('delete player');
@@ -38,8 +39,8 @@ export default (state = INITIAL_STATE, action) => {
             state.playerList.splice(playerListIndex, 1);
             state.roster.splice(rosterIndex, 1);
             return {
-                playerList: state.playerList,
-                roster: state.roster,
+                playerList: clone(state.playerList),
+                roster: clone(state.roster),
             };
         case DROP_PLAYER:
             console.log('drop player' + state.roster);
@@ -49,17 +50,18 @@ export default (state = INITIAL_STATE, action) => {
                 });
                 state.roster.splice(rosterIndexDrop, 1);
                 return {
-                    roster: state.roster,
-                    playerList: state.playerList
+                    roster: clone(state.roster),
+                    playerList: clone(state.playerList)
                 };
             } else {
                 return { ...state };
             }
         case ADD_EXISTING_PLAYER:
             console.log('add player' + state.roster);
+            state.roster.push(action.payload);
             return {
-                playerList: state.playerList,
-                roster: state.roster.push(newPlayer)
+                playerList: clone(state.playerList),
+                roster: clone(state.roster)
             };
         case REHYDRATE:
             console.log('hydrate');
@@ -79,4 +81,8 @@ export default (state = INITIAL_STATE, action) => {
             console.log('default');
             return { ...state};
     }
+}
+
+function clone(src) {
+    return JSON.parse(JSON.stringify(src));
 }

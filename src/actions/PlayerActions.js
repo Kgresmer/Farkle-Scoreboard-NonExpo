@@ -13,6 +13,7 @@ export const playerCreated = (name) => {
 };
 
 export const playerDeleted = (id) => {
+    console.log('send player deleted action');
     return {
         type: PLAYER_DELETED,
         payload: id

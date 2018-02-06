@@ -6,6 +6,8 @@ import {CardSection, Card, Button} from './common';
 class PlayerListItem extends Component {
 
     deletePlayer() {
+        console.log('delete player')
+        console.log(this.props);
         this.props.deletePlayer(this.props.player.id);
     }
 
@@ -15,8 +17,6 @@ class PlayerListItem extends Component {
 
     render() {
         const {player} = this.props;
-        console.log('List item');
-        console.log(player);
         return (
             <Card dynamicStyles={styles.card}>
                 <View style={styles.playerItemContainer}>
@@ -40,13 +40,13 @@ class PlayerListItem extends Component {
                         <Button
                             buttonStyleDyn={styles.addButtonStyle}
                             textStyleDyn={styles.addButtonTextStyle}
-                            onPress={this.playerAdded}>
+                            onPress={this.playerAdded.bind(this)}>
                             +
                         </Button>
                         <Button
                             buttonStyleDyn={styles.removeButtonStyle}
                             textStyleDyn={styles.removeButtonTextStyle}
-                            onPress={this.deletePlayer}>
+                            onPress={this.deletePlayer.bind(this)}>
                             X
                         </Button>
                     </View>

@@ -2,4 +2,4 @@ import { AppRegistry } from 'react-native';
 import App from "./App";
 
 
-AppRegistry.registerComponent('manager', () => App);
+AppRegistry.registerComponent('Farkle Scoreboard', () => App);

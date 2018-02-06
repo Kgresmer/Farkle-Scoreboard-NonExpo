@@ -58,7 +58,10 @@ export default (state = INITIAL_STATE, action) => {
             }
         case ADD_EXISTING_PLAYER:
             console.log('add player' + state.roster);
-            state.roster.push(action.payload);
+            if (action.payload) {
+                state.roster.push(action.payload);
+            }
+
             return {
                 playerList: clone(state.playerList),
                 roster: clone(state.roster)
@@ -67,10 +70,10 @@ export default (state = INITIAL_STATE, action) => {
             console.log('hydrate');
             let playerList = [];
             let roster = [];
-            if (action.payload.playerList) {
+            if (action.payload && action.payload.playerList) {
                 playerList = action.payload.playerList;
             }
-            if (action.payload.roster) {
+            if (action.payload && action.payload.roster) {
                 roster = action.payload.roster;
             }
             return {

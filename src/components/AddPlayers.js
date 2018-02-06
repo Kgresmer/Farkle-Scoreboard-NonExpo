@@ -53,10 +53,9 @@ class AddPlayers extends Component {
         this.createDataSource(this.props.roster);
     }
 
-    // TODO may not be needed
     componentWillReceiveProps(nextProps) {
         console.log('will receive add players');
-        console.log(this.props);
+        console.log(nextProps);
         this.createDataSource(nextProps.roster);
     }
 
@@ -66,6 +65,7 @@ class AddPlayers extends Component {
             rowHasChanged: (r1, r2) => r1 !== r2
         });
         console.log('about to clone');
+        console.log(players);
         this.dataSource = ds.cloneWithRows(players);
     }
 

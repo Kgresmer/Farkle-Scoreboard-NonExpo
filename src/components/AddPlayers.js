@@ -40,7 +40,7 @@ class AddPlayers extends Component {
     }
 
     onReadyButtonPress() {
-
+        this.props.navigation.navigate('SetPlayerOrder');
     }
 
     closeAddNewPlayerModal() {

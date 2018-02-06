@@ -19,8 +19,8 @@ export default (state = INITIAL_STATE, action) => {
                 name: action.payload,
                 wins: 0,
                 losses: 0,
-                bestScore: null,
-                worstScore: null
+                bestScore: 0,
+                worstScore: 0
             };
             state.playerList.push(newPlayer);
             state.roster.push(newPlayer);

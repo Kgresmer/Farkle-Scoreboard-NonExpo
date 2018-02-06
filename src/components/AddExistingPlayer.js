@@ -3,7 +3,7 @@ import {Text, View, Modal, StyleSheet, FlatList} from 'react-native';
 import {CardSection, Button, Card} from './common';
 import { connect } from 'react-redux';
 import { addExistingPlayerToRoster, playerDeleted } from '../actions';
-import PlayerListItem from "./ExistingPlayerListItem";
+import ExistingPlayerListItem from "./ExistingPlayerListItem";
 
 
 class AddExistingPlayer extends Component {

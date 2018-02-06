@@ -3,12 +3,16 @@ import {Text, TouchableWithoutFeedback, View, CheckBox, Dimensions} from 'react-
 import {CardSection, Card, Button} from './common';
 
 
-class PlayerListItem extends Component {
+class ExistingPlayerListItem extends Component {
 
-    removePlayerFromRoster() {
-        console.log('remove player from roster');
+    deletePlayer() {
+        console.log('delete player')
         console.log(this.props);
-        this.props.dropPlayer(this.props.player.id);
+        this.props.deletePlayer(this.props.player.id);
+    }
+
+    playerAdded() {
+        this.props.playerAdded(this.props.player);
     }
 
     render() {
@@ -34,9 +38,15 @@ class PlayerListItem extends Component {
                     </View>
                     <View>
                         <Button
+                            buttonStyleDyn={styles.addButtonStyle}
+                            textStyleDyn={styles.addButtonTextStyle}
+                            onPress={this.playerAdded.bind(this)}>
+                            +
+                        </Button>
+                        <Button
                             buttonStyleDyn={styles.removeButtonStyle}
                             textStyleDyn={styles.removeButtonTextStyle}
-                            onPress={this.removePlayerFromRoster.bind(this)}>
+                            onPress={this.deletePlayer.bind(this)}>
                             X
                         </Button>
                     </View>
@@ -79,4 +89,4 @@ const styles = {
     addButtonTextStyle: {}
 };
 
-export default PlayerListItem;
+export default ExistingPlayerListItem;

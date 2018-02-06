@@ -1,11 +1,10 @@
 import React, {Component} from 'react';
 import {Button} from "../components/common";
-import {StyleSheet, View, ListView} from "react-native";
+import {StyleSheet, View, FlatList} from "react-native";
 import PlayerListItem from "./PlayerListItem";
 import AddNewPlayer from "./AddNewPlayer";
 import { connect } from 'react-redux';
-import {removePlayerToRoster, playerDeleted, playerCreated} from "../actions";
-import AddExistingPlayer from "./AddExistingPlayer";
+import {removePlayerToRoster, playerCreated} from "../actions";
 
 class AddPlayers extends Component {
     static navigationOptions = {
@@ -26,9 +25,13 @@ class AddPlayers extends Component {
         this.closeAddNewPlayerModal();
     };
 
+    dropPlayer(id) {
+        console.log('player dropped');
+        this.props.removePlayerToRoster(id);
+    };
+
     onExistingPlayerPress() {
         console.log('navigate to add existing');
-        console.log(this);
         this.props.navigation.navigate('AddExistingPlayers');
     }
 
@@ -44,10 +47,6 @@ class AddPlayers extends Component {
         this.setState({showNewPlayerModal: false});
     }
 
-    closeAddExistingPlayerModal() {
-        this.props.navigation.navigate('AddExistingPlayer');
-    }
-
     componentWillMount() {
         console.log(this.props);
         this.createDataSource(this.props.roster);
@@ -60,28 +59,21 @@ class AddPlayers extends Component {
     }
 
     createDataSource(players) {
-        console.log('create datasource');
-        const ds = new ListView.DataSource({
-            rowHasChanged: (r1, r2) => r1 !== r2
-        });
-        console.log('about to clone');
-        console.log(players);
-        this.dataSource = ds.cloneWithRows(players);
+        this.dataSource = players;
     }
 
-    renderRow(player) {
+    renderRow({player}) {
         console.log('render row');
-        return <PlayerListItem player={player}/>;
+        return <PlayerListItem dropPlayer={this.dropPlayer.bind(this)} player={player}/>;
     }
 
     render() {
         return (
             <View style={styles.mainContainer}>
                 <View style={{flex: 1}}>
-                    <ListView
-                        enableEmptySections
-                        dataSource={this.dataSource}
-                        renderRow={this.renderRow.bind(this)}
+                    <FlatList
+                        data={this.dataSource}
+                        renderItem={this.renderRow.bind(this)}
                     />
                 </View>
                 <View style={{flexDirection: 'row'}}>
@@ -152,6 +144,5 @@ const mapStateToProps = (state) => {
 
 export default connect(mapStateToProps, {
     removePlayerToRoster,
-    playerDeleted,
     playerCreated
 })(AddPlayers);

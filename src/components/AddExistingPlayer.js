@@ -1,14 +1,14 @@
 import React, {Component} from 'react';
-import {Text, View, Modal, StyleSheet, ListView} from 'react-native';
+import {Text, View, Modal, StyleSheet, FlatList} from 'react-native';
 import {CardSection, Button, Card} from './common';
 import { connect } from 'react-redux';
 import { addExistingPlayerToRoster, playerDeleted } from '../actions';
-import PlayerListItem from "./PlayerListItem";
+import PlayerListItem from "./ExistingPlayerListItem";
 
 
 class AddExistingPlayer extends Component {
     static navigationOptions = {
-        title: 'Fill Your Roster',
+        title: 'Existing Players',
         headerStyle: {
             backgroundColor: '#0b7a75'
         },
@@ -26,18 +26,15 @@ class AddExistingPlayer extends Component {
     }
 
     createDataSource(players) {
-        const ds = new ListView.DataSource({
-            rowHasChanged: (r1, r2) => r1 !== r2
-        });
-        this.dataSource = ds.cloneWithRows(players);
+        this.dataSource = players;
     }
 
     onFinishAdding() {
         this.props.navigation.navigate('AddPlayers');
     }
 
-    renderRow(player) {
-        return <PlayerListItem
+    renderRow({player}) {
+        return <ExistingPlayerListItem
             playerAdded={this.props.addExistingPlayerToRoster.bind(this)}
             deletePlayer={this.props.playerDeleted.bind(this)}
             player={player}/>;
@@ -47,10 +44,9 @@ class AddExistingPlayer extends Component {
         return (
             <View style={styles.mainContainer}>
                 <View style={{flex: 1}}>
-                    <ListView
-                        enableEmptySections
-                        dataSource={this.dataSource}
-                        renderRow={this.renderRow.bind(this)}
+                    <FlatList
+                        data={this.dataSource}
+                        renderItem={this.renderRow.bind(this)}
                     />
                 </View>
                 <View style={{flexDirection: 'row'}}>

@@ -60,8 +60,8 @@ class AddPlayers extends Component {
         this.dataSource = players;
     }
 
-    renderRow({player}) {
-        return <PlayerListItem dropPlayer={this.dropPlayer.bind(this)} player={player}/>;
+    renderRow({item}) {
+        return <PlayerListItem dropPlayer={this.dropPlayer.bind(this)} player={item}/>;
     }
 
     checkForEmptyRoster() {

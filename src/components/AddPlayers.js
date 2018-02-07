@@ -28,6 +28,7 @@ class AddPlayers extends Component {
 
     dropPlayer(id) {
         console.log('player dropped');
+        console.log(id);
         this.props.removePlayerToRoster(id);
     };
 
@@ -63,9 +64,9 @@ class AddPlayers extends Component {
         this.dataSource = players;
     }
 
-    renderRow({player}) {
+    renderRow({item}) {
         console.log('render row');
-        return <PlayerListItem dropPlayer={this.dropPlayer.bind(this)} player={player}/>;
+        return <PlayerListItem dropPlayer={this.dropPlayer.bind(this)} player={item}/>;
     }
 
     render() {

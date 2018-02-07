@@ -7,11 +7,13 @@ class PlayerListItem extends Component {
 
     removePlayerFromRoster() {
         console.log('remove player from roster');
-        console.log(this.props);
+        console.log(this.props.player);
         this.props.dropPlayer(this.props.player.id);
     }
 
     render() {
+        console.log('player list item')
+        console.log(this.props)
         const {player} = this.props;
         return (
             <Card dynamicStyles={styles.card}>

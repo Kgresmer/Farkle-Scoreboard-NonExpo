@@ -10,12 +10,12 @@ const INITIAL_STATE = {
 };
 
 export default (state = INITIAL_STATE, action) => {
-    console.log(action);
     switch (action.type) {
         case PLAYER_CREATED:
-            console.log('create player');
+            const t = new Date();
             const newPlayer = {
-                id: 1,
+                id: t.getTime(),
+                key: t.getTime(),
                 name: action.payload,
                 wins: 0,
                 losses: 0,
@@ -30,25 +30,42 @@ export default (state = INITIAL_STATE, action) => {
             };
         case PLAYER_DELETED:
             console.log('delete player');
-            const playerListIndex = state.playerList.find(player => {
-                return player.id === action.payload;
+            let playerListIndexDrop = -1;
+            state.playerList.map((player, index) => {
+                if (player.id === action.payload) {
+                    playerListIndexDrop = index;
+                }
             });
-            const rosterIndex = state.roster.find(player => {
-                return player.id === action.payload;
+            if (playerListIndexDrop !== -1) {
+                state.playerList.splice(playerListIndexDrop, 1);
+            }
+
+            let rosterIndexDrop = -1;
+            state.roster.map((player, index) => {
+                if (player.id === action.payload) {
+                    rosterIndexDrop = index;
+                }
             });
-            state.playerList.splice(playerListIndex, 1);
-            state.roster.splice(rosterIndex, 1);
+            if (rosterIndexDrop !== -1) {
+                state.roster.splice(rosterIndexDrop, 1);
+            }
+
             return {
                 playerList: clone(state.playerList),
                 roster: clone(state.roster),
             };
         case DROP_PLAYER:
-            console.log('drop player' + state.roster);
+            console.log('drop player');
             if (state.roster) {
-                const rosterIndexDrop = state.roster.find(player => {
-                    return player.id === action.payload;
+                let rosterIndexDrop = -1;
+                state.roster.map((player, index) => {
+                    if (player.id === action.payload) {
+                        rosterIndexDrop = index;
+                    }
                 });
-                state.roster.splice(rosterIndexDrop, 1);
+                if (rosterIndexDrop !== -1) {
+                    state.roster.splice(rosterIndexDrop, 1);
+                }
                 return {
                     roster: clone(state.roster),
                     playerList: clone(state.playerList)
@@ -57,7 +74,7 @@ export default (state = INITIAL_STATE, action) => {
                 return { ...state };
             }
         case ADD_EXISTING_PLAYER:
-            console.log('add player' + state.roster);
+            console.log('add player');
             if (action.payload) {
                 state.roster.push(action.payload);
             }

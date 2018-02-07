@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import {Button, Card, CardSection} from "../components/common/index";
 import {connect} from 'react-redux';
-import {Platform, Text, Animated, Easing, View} from "react-native";
+import {Platform, Text, Animated, Easing, View, StyleSheet} from "react-native";
 import SortableList from "react-native-sortable-list/src/SortableList";
+import {createInitialPlayerOrderList, updatePlayerOrderList} from "../actions";
 
 class SetPlayerOrder extends Component {
     static navigationOptions = {

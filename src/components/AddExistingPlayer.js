@@ -33,11 +33,11 @@ class AddExistingPlayer extends Component {
         this.props.navigation.navigate('AddPlayers');
     }
 
-    renderRow({player}) {
+    renderRow({item}) {
         return <ExistingPlayerListItem
             playerAdded={this.props.addExistingPlayerToRoster.bind(this)}
             deletePlayer={this.props.playerDeleted.bind(this)}
-            player={player}/>;
+            player={item}/>;
     }
 
     render() {

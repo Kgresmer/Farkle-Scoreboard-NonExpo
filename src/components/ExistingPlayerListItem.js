@@ -1,12 +1,14 @@
 import React, {Component} from 'react';
 import {Text, View, Dimensions} from 'react-native';
 import {CardSection, Card, Button} from './common';
+import {Confirm} from "./common/Confirm";
 
 
 class ExistingPlayerListItem extends Component {
+    state = { showModal: false};
 
     deletePlayer() {
-        this.props.deletePlayer(this.props.player.id);
+        this.setState({ showModal: true })
     }
 
     playerAdded() {
@@ -32,6 +34,15 @@ class ExistingPlayerListItem extends Component {
                 Add
             </Button>);
         }
+    }
+
+    onAccept() {
+        this.props.deletePlayer(this.props.player.id);
+        this.setState({ showModal: false });
+    }
+
+    onDecline() {
+        this.setState({ showModal: false })
     }
 
     render() {
@@ -64,6 +75,14 @@ class ExistingPlayerListItem extends Component {
                         </Button>
                     </View>
                 </View>
+                <Confirm
+                    visible={this.state.showModal}
+                    onAccept={this.onAccept.bind(this)}
+                    onDecline={this.onDecline.bind(this)}
+                >
+                    Are you sure you want to delete '{player.name}'?
+                    {player.name} will be removed from the existing player list and all of their stats will be deleted.
+                </Confirm>
             </Card>
         )
     }

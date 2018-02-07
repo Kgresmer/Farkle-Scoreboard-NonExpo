@@ -86,6 +86,7 @@ class AddPlayers extends Component {
                 <View style={{flexDirection: 'row'}}>
                     <View style={{flex: 2}}>
                         <Button
+                            disabled={this.props.playerList.length > 0}
                             buttonStyleDyn={styles.existingButtonStyle}
                             onPress={this.onExistingPlayerPress.bind(this)}>
                             Add Existing Player

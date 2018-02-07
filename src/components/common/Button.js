@@ -1,12 +1,16 @@
 import React from 'react';
 import {Text, TouchableOpacity, StyleSheet } from 'react-native';
 
-const Button = ({ children, onPress, buttonStyleDyn, textStyleDyn }) => {
+const Button = ({ children, onPress, buttonStyleDyn, textStyleDyn, disabled }) => {
     const { buttonStyle, textStyle } = styles;
     const combinedButtonStyles = StyleSheet.flatten([buttonStyle, buttonStyleDyn]);
     const combinedTextStyles = StyleSheet.flatten([textStyle, textStyleDyn]);
     return (
-        <TouchableOpacity onPress={onPress} style={combinedButtonStyles}>
+        <TouchableOpacity
+            onPress={onPress}
+            style={combinedButtonStyles}
+            disabled={disabled}
+        >
             <Text style={combinedTextStyles}>
                 {children}
             </Text>

@@ -38,7 +38,6 @@ class AddExistingPlayer extends Component {
     }
 
     renderRow({player}) {
-
         return <ExistingPlayerListItem
             playerAdded={this.props.addExistingPlayerToRoster.bind(this)}
             playerOnRoster={this.checkIfPlayerIsOnRoster(player.id)}

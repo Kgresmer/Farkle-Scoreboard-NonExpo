@@ -28,7 +28,7 @@ export const addExistingPlayerToRoster = (player) => {
 };
 
 
-export const removePlayerToRoster = (id) => {
+export const removePlayerFromRoster = (id) => {
     return {
         type: DROP_PLAYER,
         payload: id

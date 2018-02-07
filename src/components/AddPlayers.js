@@ -1,14 +1,17 @@
 import React, {Component} from 'react';
 import {Button} from "../components/common";
-import {StyleSheet, View, FlatList} from "react-native";
+import {StyleSheet, View, FlatList, Text} from "react-native";
 import PlayerListItem from "./PlayerListItem";
 import AddNewPlayer from "./AddNewPlayer";
 import { connect } from 'react-redux';
-import {removePlayerToRoster, playerCreated} from "../actions";
+import {removePlayerFromRoster, playerCreated} from "../actions";
 
 class AddPlayers extends Component {
     static navigationOptions = {
         title: 'Fill Your Roster',
+        titleStyle: {
+            textAlign: 'center'
+        },
         headerStyle: {
             backgroundColor: '#0b7a75'
         },
@@ -18,21 +21,18 @@ class AddPlayers extends Component {
         headerLeft: null
     };
 
-    state = {showNewPlayerModal: false, showExistingPlayerModal: false};
+    state = {showNewPlayerModal: false};
 
     addNewPlayer(name) {
-        console.log('player created. adding player');
         this.props.playerCreated(name);
         this.closeAddNewPlayerModal();
     };
 
     dropPlayer(id) {
-        console.log('player dropped');
-        this.props.removePlayerToRoster(id);
+        this.props.removePlayerFromRoster(id);
     };
 
     onExistingPlayerPress() {
-        console.log('navigate to add existing');
         this.props.navigation.navigate('AddExistingPlayers');
     }
 
@@ -49,13 +49,10 @@ class AddPlayers extends Component {
     }
 
     componentWillMount() {
-        console.log(this.props);
         this.createDataSource(this.props.roster);
     }
 
     componentWillReceiveProps(nextProps) {
-        console.log('will receive add players');
-        console.log(nextProps);
         this.createDataSource(nextProps.roster);
     }
 
@@ -64,18 +61,27 @@ class AddPlayers extends Component {
     }
 
     renderRow({player}) {
-        console.log('render row');
         return <PlayerListItem dropPlayer={this.dropPlayer.bind(this)} player={player}/>;
+    }
+
+    checkForEmptyRoster() {
+        if (this.props.roster.length > 0) {
+            return (<FlatList
+                data={this.dataSource}
+                renderItem={this.renderRow.bind(this)}
+            />);
+        } else {
+            return (<Text style={styles.emptyRosterText}>
+                Your Roster is Empty. Click below to add players.
+            </Text>);
+        }
     }
 
     render() {
         return (
             <View style={styles.mainContainer}>
                 <View style={{flex: 1}}>
-                    <FlatList
-                        data={this.dataSource}
-                        renderItem={this.renderRow.bind(this)}
-                    />
+                    {this.checkForEmptyRoster()}
                 </View>
                 <View style={{flexDirection: 'row'}}>
                     <View style={{flex: 2}}>
@@ -130,7 +136,11 @@ const styles = StyleSheet.create({
         paddingTop: 4,
         paddingBottom: 4,
     },
-    readyButtonStyle: {}
+    readyButtonStyle: {},
+    emptyRosterText: {
+        fontSize: 50,
+        color: 'rgba(11,172,167,0.40)'
+    }
 });
 
 
@@ -144,6 +154,6 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, {
-    removePlayerToRoster,
+    removePlayerFromRoster,
     playerCreated
 })(AddPlayers);

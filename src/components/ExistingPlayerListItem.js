@@ -1,18 +1,37 @@
 import React, {Component} from 'react';
-import {Text, TouchableWithoutFeedback, View, CheckBox, Dimensions} from 'react-native';
+import {Text, View, Dimensions} from 'react-native';
 import {CardSection, Card, Button} from './common';
 
 
 class ExistingPlayerListItem extends Component {
 
     deletePlayer() {
-        console.log('delete player')
-        console.log(this.props);
         this.props.deletePlayer(this.props.player.id);
     }
 
     playerAdded() {
         this.props.playerAdded(this.props.player);
+
+    }
+
+    dropPlayer() {
+        this.props.dropPlayer(this.props.player.id);
+    }
+
+    checkIfPlayerIsOnRoster() {
+        if (this.props.playerOnRoster) {
+            return (<Button
+                buttonStyleDyn={styles.dropButtonStyle}
+                onPress={this.dropPlayer.bind(this)}>
+                Drop
+            </Button>);
+        } else {
+            return (<Button
+                buttonStyleDyn={styles.addButtonStyle}
+                onPress={this.playerAdded.bind(this)}>
+                Add
+            </Button>);
+        }
     }
 
     render() {
@@ -37,17 +56,11 @@ class ExistingPlayerListItem extends Component {
                         </CardSection>
                     </View>
                     <View>
-                        <Button
-                            buttonStyleDyn={styles.addButtonStyle}
-                            textStyleDyn={styles.addButtonTextStyle}
-                            onPress={this.playerAdded.bind(this)}>
-                            +
-                        </Button>
+                        {this.checkIfPlayerIsOnRoster()}
                         <Button
                             buttonStyleDyn={styles.removeButtonStyle}
-                            textStyleDyn={styles.removeButtonTextStyle}
                             onPress={this.deletePlayer.bind(this)}>
-                            X
+                            Delete
                         </Button>
                     </View>
                 </View>
@@ -79,14 +92,16 @@ const styles = {
     },
     removeButtonStyle: {
         alignSelf: 'flex-start',
-        backgroundColor: '#ea651d'
+        backgroundColor: '#C70039'
     },
-    removeButtonTextStyle: {},
     addButtonStyle: {
         alignSelf: 'flex-start',
         backgroundColor: '#89ae6d'
     },
-    addButtonTextStyle: {}
+    dropButtonStyle: {
+        alignSelf: 'flex-start',
+        backgroundColor: '#ea651d'
+    },
 };
 
 export default ExistingPlayerListItem;

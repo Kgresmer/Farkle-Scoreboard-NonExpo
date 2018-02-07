@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Text, View, Modal, StyleSheet, FlatList} from 'react-native';
 import {CardSection, Button, Card} from './common';
 import { connect } from 'react-redux';
-import { addExistingPlayerToRoster, playerDeleted } from '../actions';
+import { addExistingPlayerToRoster, playerDeleted, removePlayerFromRoster } from '../actions';
 import ExistingPlayerListItem from "./ExistingPlayerListItem";
 
 
@@ -33,9 +33,16 @@ class AddExistingPlayer extends Component {
         this.props.navigation.navigate('AddPlayers');
     }
 
+    checkIfPlayerIsOnRoster(playerId) {
+        return this.props.roster.some(player => player.id === playerId);
+    }
+
     renderRow({player}) {
+
         return <ExistingPlayerListItem
             playerAdded={this.props.addExistingPlayerToRoster.bind(this)}
+            playerOnRoster={this.checkIfPlayerIsOnRoster(player.id)}
+            dropPlayer={this.props.removePlayerFromRoster.bind(this)}
             deletePlayer={this.props.playerDeleted.bind(this)}
             player={player}/>;
     }
@@ -91,4 +98,9 @@ const mapStateToProps = (state) => {
     return {roster: state.player.roster, playerList: state.player.playerList};
 };
 
-export default connect(mapStateToProps, {addExistingPlayerToRoster, playerDeleted})(AddExistingPlayer);
+export default connect(
+    mapStateToProps,
+    {addExistingPlayerToRoster,
+        playerDeleted,
+        removePlayerFromRoster
+    })(AddExistingPlayer);

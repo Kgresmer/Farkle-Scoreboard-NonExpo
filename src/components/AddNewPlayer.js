@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
         fontSize: 18,
         textAlign: 'center',
         lineHeight: 40,
-        marginBottom: 35,
+        marginBottom: 20,
         color: 'white'
     },
     containerStyles: {

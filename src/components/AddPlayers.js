@@ -3,7 +3,7 @@ import {Button} from "../components/common";
 import {StyleSheet, View, FlatList, Text} from "react-native";
 import PlayerListItem from "./PlayerListItem";
 import AddNewPlayer from "./AddNewPlayer";
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 import {removePlayerFromRoster, playerCreated} from "../actions";
 
 class AddPlayers extends Component {
@@ -77,6 +77,27 @@ class AddPlayers extends Component {
         }
     }
 
+    checkForEmptyPlayerList() {
+        if (this.props.playerList.length < 1) {
+            return (
+                <Button
+                    disabled={true}
+                    buttonStyleDyn={styles.existingButtonDisabledStyle}
+                    onPress={()=>{}}>
+                    Add Existing Player
+                </Button>
+            )
+        } else {
+            return (
+                <Button
+                    buttonStyleDyn={styles.existingButtonStyle}
+                    onPress={this.onExistingPlayerPress.bind(this)}>
+                    Add Existing Player
+                </Button>
+            )
+        }
+    }
+
     render() {
         return (
             <View style={styles.mainContainer}>
@@ -85,12 +106,7 @@ class AddPlayers extends Component {
                 </View>
                 <View style={{flexDirection: 'row'}}>
                     <View style={{flex: 2}}>
-                        <Button
-                            disabled={this.props.playerList.length < 1}
-                            buttonStyleDyn={styles.existingButtonStyle}
-                            onPress={this.onExistingPlayerPress.bind(this)}>
-                            Add Existing Player
-                        </Button>
+                        {this.checkForEmptyPlayerList()}
                     </View>
                     <View style={{flex: 2}}>
                         <Button
@@ -130,8 +146,16 @@ const styles = StyleSheet.create({
         paddingLeft: 5,
         paddingRight: 5
     },
-    existingButtonStyle: {},
-    newButtonStyle: {},
+    existingButtonStyle: {
+        height: 30
+    },
+    existingButtonDisabledStyle: {
+        height: 30,
+        backgroundColor: 'rgba(11,172,167,0.40)'
+    },
+    newButtonStyle: {
+        height: 30
+    },
     readyButtonTextStyle: {
         fontSize: 30,
         paddingTop: 4,

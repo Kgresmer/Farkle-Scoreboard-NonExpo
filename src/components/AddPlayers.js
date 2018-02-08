@@ -72,7 +72,7 @@ class AddPlayers extends Component {
             />);
         } else {
             return (<Text style={styles.emptyRosterText}>
-                Your Roster is Empty. Click below to add players.
+                Your Roster is Empty.{'\n'}Click below to add players.
             </Text>);
         }
     }
@@ -86,7 +86,7 @@ class AddPlayers extends Component {
                 <View style={{flexDirection: 'row'}}>
                     <View style={{flex: 2}}>
                         <Button
-                            disabled={this.props.playerList.length > 0}
+                            disabled={this.props.playerList.length < 1}
                             buttonStyleDyn={styles.existingButtonStyle}
                             onPress={this.onExistingPlayerPress.bind(this)}>
                             Add Existing Player
@@ -139,8 +139,10 @@ const styles = StyleSheet.create({
     },
     readyButtonStyle: {},
     emptyRosterText: {
-        fontSize: 50,
-        color: 'rgba(11,172,167,0.40)'
+        marginTop: 40,
+        fontSize: 30,
+        color: 'rgba(11,172,167,0.40)',
+        textAlign: 'center'
     }
 });
 

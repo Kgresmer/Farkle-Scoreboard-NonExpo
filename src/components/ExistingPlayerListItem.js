@@ -111,15 +111,21 @@ const styles = {
     },
     removeButtonStyle: {
         alignSelf: 'flex-start',
-        backgroundColor: '#C70039'
+        backgroundColor: '#C70039',
+        width: 90,
+        marginTop: 5
     },
     addButtonStyle: {
         alignSelf: 'flex-start',
-        backgroundColor: '#89ae6d'
+        backgroundColor: '#89ae6d',
+        width: 90,
+        marginTop: 5
     },
     dropButtonStyle: {
         alignSelf: 'flex-start',
-        backgroundColor: '#ea651d'
+        backgroundColor: '#ea651d',
+        width: 90,
+        marginTop: 5
     },
 };
 

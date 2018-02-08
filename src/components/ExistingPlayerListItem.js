@@ -51,7 +51,7 @@ class ExistingPlayerListItem extends Component {
             <Card dynamicStyles={styles.card}>
                 <View style={styles.playerItemContainer}>
                     <View>
-                        <CardSection style={{backgroundColor: '#05a8aa'}}>
+                        <CardSection style={{backgroundColor: '#05a8aa', flexWrap: 'wrap'}}>
                             <Text style={styles.nameStyles}>
                                 {player.name}
                             </Text>

@@ -6,20 +6,16 @@ import {CardSection, Card, Button} from './common';
 class PlayerListItem extends Component {
 
     removePlayerFromRoster() {
-        console.log('remove player from roster');
-        console.log(this.props.player);
         this.props.dropPlayer(this.props.player.id);
     }
 
     render() {
-        console.log('player list item')
-        console.log(this.props)
         const {player} = this.props;
         return (
             <Card dynamicStyles={styles.card}>
                 <View style={styles.playerItemContainer}>
                     <View>
-                        <CardSection style={{backgroundColor: '#05a8aa'}}>
+                        <CardSection style={{backgroundColor: '#05a8aa', flexWrap: 'wrap'}}>
                             <Text style={styles.nameStyles}>
                                 {player.name}
                             </Text>

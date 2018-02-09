@@ -101,7 +101,7 @@ class AddPlayers extends Component {
     render() {
         return (
             <View style={styles.mainContainer}>
-                <View style={{flex: 1}}>
+                <View style={{flex: 1, flexDirection: 'row'}}>
                     {this.checkForEmptyRoster()}
                 </View>
                 <View style={{flexDirection: 'row'}}>

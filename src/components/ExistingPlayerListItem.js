@@ -1,7 +1,6 @@
-import React, {Component} from 'react';
-import {Text, View, Dimensions} from 'react-native';
-import {CardSection, Card, Button} from './common';
-import {Confirm} from "./common/Confirm";
+import React, {Component} from "react";
+import {Text, View} from "react-native";
+import {Button} from "./common";
 
 
 class ExistingPlayerListItem extends Component {
@@ -48,38 +47,52 @@ class ExistingPlayerListItem extends Component {
     render() {
         const {player} = this.props;
         return (
-            <View style={{
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-                backgroundColor: '#05a8aa',
-                alignItems: 'center',
-                marginTop: 5,
-                paddingTop: 5,
-                paddingBottom: 5,
-                paddingLeft: 10,
-                paddingRight: 10
-            }}>
-                    <Text style={styles.nameStyles}>
-                        {player.name}{"\n"}
-                        <Text style={styles.textStyles}>
-                        Wins: {player.wins}     Losses: {player.losses}{"\n"}
+            <View style={styles.container}>
+                <Text style={styles.nameStyles}>
+                    {player.name}{"\n"}
+                    <Text style={styles.textStyles}>
+                        Wins: {player.wins} Losses: {player.losses}{"\n"}
                         Best Score: {player.bestScore} Worst Score: {player.worstScore}
-                        </Text>
                     </Text>
+                </Text>
                 <View style={{alignItems: 'flex-end'}}>
-                    {this.checkIfPlayerIsOnRoster()}
                     <Button
                         buttonStyleDyn={styles.removeButtonStyle}
                         onPress={this.deletePlayer.bind(this)}>
                         Delete
                     </Button>
+                    {this.checkIfPlayerIsOnRoster()}
                 </View>
+                <Confirm
+                    visible={this.state.showModal}
+                    onAccept={this.onAccept.bind(this)}
+                    onDecline={this.onDecline.bind(this)}
+                >
+                    Are you sure you want to delete '{player.name}'?
+                    {player.name} will be removed from the existing player list and all of their stats will be deleted.
+                </Confirm>
             </View>
         )
     }
 }
 
 const styles = {
+    container: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        backgroundColor: '#05a8aa',
+        alignItems: 'center',
+        marginTop: 5,
+        paddingTop: 5,
+        paddingBottom: 5,
+        paddingLeft: 10,
+        paddingRight: 10,
+        borderRadius: 2,
+        shadowOffset: { width: 0, height: 3 },
+        shadowOpacity: 0.2,
+        shadowRadius: 3,
+        elevation: 3,
+    },
     textStyles: {
         alignSelf: 'center',
         fontSize: 16,

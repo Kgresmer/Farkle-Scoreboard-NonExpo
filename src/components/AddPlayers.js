@@ -83,6 +83,7 @@ class AddPlayers extends Component {
                 <Button
                     disabled={true}
                     buttonStyleDyn={styles.existingButtonDisabledStyle}
+                    textStyleDyn={{marginBottom: 10}}
                     onPress={()=>{}}>
                     Add Existing Player
                 </Button>
@@ -151,7 +152,7 @@ const styles = StyleSheet.create({
     },
     existingButtonDisabledStyle: {
         height: 60,
-        backgroundColor: 'rgba(11,172,167,0.40)'
+        backgroundColor: 'rgba(11,172,167,0.40)',
     },
     newButtonStyle: {
         height: 60

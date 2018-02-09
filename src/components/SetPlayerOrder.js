@@ -17,20 +17,30 @@ class SetPlayerOrder extends Component {
     };
 
     componentWillMount() {
+        console.log('compinent will mount');
+        console.log(this.props);
         this.props.createInitialPlayerOrderList();
+        this.getData(this.props.sortedPlayerList);
     }
 
     componentWillReceiveProps(nextProps) {
+        console.log('will receive props');
+        console.log(nextProps);
+        this.getData(nextProps.playerList)
+    }
 
+    getData(playerList) {
+        this.dataSource = playerList;
     }
 
     render() {
+        console.log('rendering view');
         return (
             <View style={styles.container}>
                 <SortableList
                     style={styles.list}
                     contentContainerStyle={styles.contentContainer}
-                    data={this.props.sortedPlayerList}
+                    data={this.getData}
                     renderRow={this._renderRow} />
             </View>
         )
@@ -54,6 +64,7 @@ export default connect(mapStateToProps, {createInitialPlayerOrderList, updatePla
 class Row extends Component {
 
     constructor(props) {
+        console.log('row constructor');
         super(props);
 
         this._active = new Animated.Value(0);
@@ -100,6 +111,7 @@ class Row extends Component {
     }
 
     render() {
+        console.log('rendering row');
         const {data, active} = this.props;
 
         return (

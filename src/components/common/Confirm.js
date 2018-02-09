@@ -21,8 +21,12 @@ const Confirm = ({children, onAccept, onDecline, visible}) => {
                       <Text style={textStyles}>{children}</Text>
                   </CardSection>
                   <CardSection>
-                      <Button onPress={onAccept}>Yes</Button>
-                      <Button onPress={onDecline}>No</Button>
+                      <Button
+                          buttonStyleDyn={{backgroundColor: '#ea651d'}}
+                          onPress={onAccept}>Yes</Button>
+                      <Button
+                          buttonStyleDyn={{backgroundColor: '#05a8aa'}}
+                          onPress={onDecline}>No</Button>
                   </CardSection>
               </Card>
           </View>
@@ -33,6 +37,7 @@ const Confirm = ({children, onAccept, onDecline, visible}) => {
 const styles = StyleSheet.create({
     cardStyles: {
         justifyContent: 'center',
+        alignItems: 'center',
         marginLeft: 35,
         marginRight: 35,
         borderRadius: 5

@@ -68,8 +68,8 @@ class ExistingPlayerListItem extends Component {
                     onAccept={this.onAccept.bind(this)}
                     onDecline={this.onDecline.bind(this)}
                 >
-                    Are you sure you want to delete '{player.name}'?
-                    {player.name} will be removed from the existing player list and all of their stats will be deleted.
+                    Are you sure you want to delete '{player.name}'? {'\n'}
+                    They will be removed from the existing player list and all of their stats will be deleted.
                 </Confirm>
             </View>
         )

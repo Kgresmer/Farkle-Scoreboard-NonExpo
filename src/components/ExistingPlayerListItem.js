@@ -60,13 +60,11 @@ class ExistingPlayerListItem extends Component {
                 paddingRight: 10
             }}>
                     <Text style={styles.nameStyles}>
-                        {player.name}
-                    </Text>
-                    <Text style={styles.textStyles}>
-                        Wins: {player.wins} {"\n"}
-                        Losses: {player.losses} {"\n"}
-                        Best: {player.bestScore} {"\n"}
-                        Worst: {player.worstScore}
+                        {player.name}{"\n"}
+                        <Text style={styles.textStyles}>
+                        Wins: {player.wins}     Losses: {player.losses}{"\n"}
+                        Best Score: {player.bestScore} Worst Score: {player.worstScore}
+                        </Text>
                     </Text>
                 <View style={{alignItems: 'flex-end'}}>
                     {this.checkIfPlayerIsOnRoster()}
@@ -85,11 +83,13 @@ const styles = {
     textStyles: {
         alignSelf: 'center',
         fontSize: 16,
+        lineHeight: 20,
         color: 'white',
     },
     nameStyles: {
         alignSelf: 'center',
         fontSize: 21,
+        lineHeight: 30,
         color: 'white',
     },
     removeButtonStyle: {

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import {Card, CardSection, Button } from "../components/common/index";
+import { Button } from "../components/common/index";
 import { connect } from 'react-redux';
+import {Text, View} from "react-native";
 
 class Scoreboard extends Component {
     static navigationOptions = {
@@ -13,22 +14,42 @@ class Scoreboard extends Component {
         }
     };
 
-    onButtonPress() {
+    componentDidMount() {
+        BackAndroid.addEventListener('hardwareBackPress', this.handleBackButton);
+    }
 
+    componentWillUnmount() {
+        // TODO prompt user when trying to go back.
+        // TODO Add IOS support
+        BackAndroid.removeEventListener('hardwareBackPress', this.handleBackButton);
+    }
+
+    handleBackButton() {
+        ToastAndroid.show('Back button is pressed', ToastAndroid.SHORT);
+        return true; //return true to block back button
     }
 
     render() {
         return (
-            <Card>
-                <CardSection>
-                    <Button onPress={this.onButtonPress.bind(this)}>
-                        Create
-                    </Button>
-                </CardSection>
-            </Card>
+            <View style={styles.mainContainer}>
+                <Text>Scoreboard</Text>
+            </View>
         )
     }
 }
+
+const styles = StyleSheet.create({
+    mainContainer: {
+        flex: 1,
+        flexDirection: 'column',
+        justifyContent: 'flex-end',
+        alignItems: 'center',
+        paddingBottom: 10,
+        paddingLeft: 5,
+        paddingRight: 5
+    }
+
+});
 
 
 const mapStateToProps = (state) => {

@@ -48,6 +48,21 @@ class AddPlayers extends Component {
         this.setState({showNewPlayerModal: false});
     }
 
+    componentDidMount() {
+        BackAndroid.addEventListener('hardwareBackPress', this.handleBackButton);
+    }
+
+    componentWillUnmount() {
+        // TODO prompt user when trying to go back.
+        // TODO Add IOS support
+        BackAndroid.removeEventListener('hardwareBackPress', this.handleBackButton);
+    }
+
+    handleBackButton() {
+        ToastAndroid.show('Back button is pressed', ToastAndroid.SHORT);
+        return true; //return true to block back button
+    }
+
     componentWillMount() {
         this.createDataSource(this.props.roster);
     }

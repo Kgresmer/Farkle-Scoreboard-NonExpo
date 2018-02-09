@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
-import {Text, TouchableWithoutFeedback, View, CheckBox, Dimensions} from 'react-native';
-import {CardSection, Card, Button} from './common';
+import React, {Component} from "react";
+import {Text, View} from "react-native";
+import {Button} from "./common";
 
 
 class PlayerListItem extends Component {

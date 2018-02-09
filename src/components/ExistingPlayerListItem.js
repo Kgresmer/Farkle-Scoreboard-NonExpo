@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import {Text, View} from "react-native";
-import {Button} from "./common";
+import {Button, Confirm} from "./common";
 
 
 class ExistingPlayerListItem extends Component {

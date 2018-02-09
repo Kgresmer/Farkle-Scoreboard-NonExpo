@@ -7,7 +7,7 @@ import {Input} from "./common/Input";
 
 class AddNewPlayer extends Component {
 
-    state = {name: ''};
+    state = {name: '', errorMessage: ''};
 
     componentWillMount() {
         console.log(' add new player mounted')
@@ -15,13 +15,31 @@ class AddNewPlayer extends Component {
     }
 
     addNewPlayer() {
-        this.props.addPlayer(this.state.name);
-        this.props.closeModal();
+        if (this.state.name === '') {
+            this.state.errorMessage = 'You cannot enter an empty name';
+            setTimeout(() => {
+                this.state.errorMessage = '';
+            }, 2500)
+        } else if (this.state.name.length >= 20) {
+            this.state.errorMessage = 'You cannot enter an name greater than 20 characters';
+            setTimeout(() => {
+                this.state.errorMessage = '';
+            }, 2500)
+        } else {
+            this.props.addPlayer(this.state.name);
+            this.props.closeModal();
+        }
     }
 
     cancelAddNewPlayer() {
         this.props.closeModal();
     };
+
+    showErrorMessage() {
+        if (this.state.errorMessage) {
+            return (<Text>{this.state.errorMessage}</Text>);
+        }
+    }
 
     render() {
         return (
@@ -41,12 +59,14 @@ class AddNewPlayer extends Component {
                             <CardSection>
                                 <Input
                                     label=""
+                                    maxLength="20"
                                     keyboardType="default"
                                     placeholder="Name"
                                     onChangeText={value => this.setState({name: value})}
                                 />
                             </CardSection>
                         </Card>
+                        {this.showErrorMessage()}
                         <CardSection>
                             <Button
                                 buttonStyleDyn={{backgroundColor: '#ea651d'}}

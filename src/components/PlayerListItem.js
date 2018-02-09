@@ -14,23 +14,21 @@ class PlayerListItem extends Component {
         return (
             <Card dynamicStyles={styles.card}>
                 <View style={styles.playerItemContainer}>
-                    <View>
+                    <View >
                         <CardSection style={{backgroundColor: '#05a8aa', flexWrap: 'wrap'}}>
                             <Text style={styles.nameStyles}>
                                 {player.name}
                             </Text>
                         </CardSection>
                     </View>
-                    <View>
+                    <View >
                         <CardSection style={{backgroundColor: '#05a8aa', padding: 3}}>
                             <Text style={styles.textStyles}>
-                                Wins: {player.wins} Losses: {player.losses} {"\n"}
-                                Best Score: {player.bestScore} {"\n"}
-                                Worst Score: {player.worstScore}
+                                Wins: {player.wins} {"\n"}Losses: {player.losses}
                             </Text>
                         </CardSection>
                     </View>
-                    <View>
+                    <View >
                         <Button
                             buttonStyleDyn={styles.removeButtonStyle}
                             textStyleDyn={styles.removeButtonTextStyle}
@@ -47,7 +45,7 @@ class PlayerListItem extends Component {
 const styles = {
     card: {
         backgroundColor: '#05a8aa',
-        width: (Dimensions.get('window').width)
+        flex: 1,
     },
     playerItemContainer: {
         flex: 1,

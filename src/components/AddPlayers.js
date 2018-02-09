@@ -147,14 +147,14 @@ const styles = StyleSheet.create({
         paddingRight: 5
     },
     existingButtonStyle: {
-        height: 30
+        height: 60
     },
     existingButtonDisabledStyle: {
-        height: 30,
+        height: 60,
         backgroundColor: 'rgba(11,172,167,0.40)'
     },
     newButtonStyle: {
-        height: 30
+        height: 60
     },
     readyButtonTextStyle: {
         fontSize: 30,

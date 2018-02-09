@@ -5,10 +5,10 @@ import {Confirm} from "./common/Confirm";
 
 
 class ExistingPlayerListItem extends Component {
-    state = { showModal: false};
+    state = {showModal: false};
 
     deletePlayer() {
-        this.setState({ showModal: true })
+        this.setState({showModal: true})
     }
 
     playerAdded() {
@@ -38,94 +38,77 @@ class ExistingPlayerListItem extends Component {
 
     onAccept() {
         this.props.deletePlayer(this.props.player.id);
-        this.setState({ showModal: false });
+        this.setState({showModal: false});
     }
 
     onDecline() {
-        this.setState({ showModal: false })
+        this.setState({showModal: false})
     }
 
     render() {
         const {player} = this.props;
         return (
-            <Card dynamicStyles={styles.card}>
-                <View style={styles.playerItemContainer}>
-                    <View>
-                        <CardSection style={{backgroundColor: '#05a8aa', flexWrap: 'wrap'}}>
-                            <Text style={styles.nameStyles}>
-                                {player.name}
-                            </Text>
-                        </CardSection>
-                    </View>
-                    <View>
-                        <CardSection style={{backgroundColor: '#05a8aa', padding: 3}}>
-                            <Text style={styles.textStyles}>
-                                Wins: {player.wins} Losses: {player.losses} {"\n"}
-                                Best Score: {player.bestScore} {"\n"}
-                                Worst Score: {player.worstScore}
-                            </Text>
-                        </CardSection>
-                    </View>
-                    <View>
-                        {this.checkIfPlayerIsOnRoster()}
-                        <Button
-                            buttonStyleDyn={styles.removeButtonStyle}
-                            onPress={this.deletePlayer.bind(this)}>
-                            Delete
-                        </Button>
-                    </View>
+            <View style={{
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                backgroundColor: '#05a8aa',
+                alignItems: 'center',
+                marginTop: 5,
+                paddingTop: 5,
+                paddingBottom: 5,
+                paddingLeft: 10,
+                paddingRight: 10
+            }}>
+                    <Text style={styles.nameStyles}>
+                        {player.name}
+                    </Text>
+                    <Text style={styles.textStyles}>
+                        Wins: {player.wins} {"\n"}
+                        Losses: {player.losses} {"\n"}
+                        Best: {player.bestScore} {"\n"}
+                        Worst: {player.worstScore}
+                    </Text>
+                <View style={{alignItems: 'flex-end'}}>
+                    {this.checkIfPlayerIsOnRoster()}
+                    <Button
+                        buttonStyleDyn={styles.removeButtonStyle}
+                        onPress={this.deletePlayer.bind(this)}>
+                        Delete
+                    </Button>
                 </View>
-                <Confirm
-                    visible={this.state.showModal}
-                    onAccept={this.onAccept.bind(this)}
-                    onDecline={this.onDecline.bind(this)}
-                >
-                    Are you sure you want to delete '{player.name}'?
-                    {player.name} will be removed from the existing player list and all of their stats will be deleted.
-                </Confirm>
-            </Card>
+            </View>
         )
     }
 }
 
 const styles = {
-    card: {
-        backgroundColor: '#05a8aa',
-        width: (Dimensions.get('window').width)
-    },
-    playerItemContainer: {
-        flex: 1,
-        flexDirection: 'row',
-        justifyContent: 'space-around',
-        alignItems: 'center'
-    },
     textStyles: {
-        alignSelf: 'stretch',
+        alignSelf: 'center',
         fontSize: 16,
         color: 'white',
     },
     nameStyles: {
-        alignSelf: 'stretch',
+        alignSelf: 'center',
         fontSize: 21,
         color: 'white',
     },
     removeButtonStyle: {
-        alignSelf: 'flex-start',
+        alignSelf: 'center',
         backgroundColor: '#C70039',
         width: 90,
-        marginTop: 5
+        marginTop: 1
     },
     addButtonStyle: {
-        alignSelf: 'flex-start',
+        alignSelf: 'center',
         backgroundColor: '#89ae6d',
         width: 90,
-        marginTop: 5
+        marginTop: 1
     },
     dropButtonStyle: {
-        alignSelf: 'flex-start',
+        alignSelf: 'center',
         backgroundColor: '#ea651d',
         width: 90,
-        marginTop: 5
+        marginTop: 1
     },
 };
 

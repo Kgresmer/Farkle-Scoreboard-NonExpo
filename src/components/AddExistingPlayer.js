@@ -49,7 +49,7 @@ class AddExistingPlayer extends Component {
     render() {
         return (
             <View style={styles.mainContainer}>
-                <View style={{flex: 1}}>
+                <View style={{flex: 1, flexDirection: 'row'}}>
                     <FlatList
                         data={this.dataSource}
                         renderItem={this.renderRow.bind(this)}

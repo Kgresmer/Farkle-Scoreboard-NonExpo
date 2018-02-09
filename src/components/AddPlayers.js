@@ -158,8 +158,8 @@ const styles = StyleSheet.create({
     },
     readyButtonTextStyle: {
         fontSize: 30,
-        paddingTop: 4,
-        paddingBottom: 4,
+        paddingTop: 6,
+        paddingBottom: 6,
     },
     readyButtonStyle: {},
     emptyRosterText: {

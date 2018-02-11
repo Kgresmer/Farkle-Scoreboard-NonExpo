@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Button} from "../components/common";
-import {StyleSheet, View, FlatList, Text} from "react-native";
+import {StyleSheet, View, FlatList, Text, BackHandler, ToastAndroid} from "react-native";
 import PlayerListItem from "./PlayerListItem";
 import AddNewPlayer from "./AddNewPlayer";
 import {connect} from 'react-redux';
@@ -49,13 +49,13 @@ class AddPlayers extends Component {
     }
 
     componentDidMount() {
-        BackAndroid.addEventListener('hardwareBackPress', this.handleBackButton);
+        BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
     }
 
     componentWillUnmount() {
         // TODO prompt user when trying to go back.
         // TODO Add IOS support
-        BackAndroid.removeEventListener('hardwareBackPress', this.handleBackButton);
+        BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
     }
 
     handleBackButton() {

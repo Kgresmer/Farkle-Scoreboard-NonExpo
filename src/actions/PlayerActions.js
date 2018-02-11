@@ -2,12 +2,19 @@ import {
     ADD_EXISTING_PLAYER,
     DROP_PLAYER,
     PLAYER_CREATED,
-    PLAYER_DELETED
+    PLAYER_DELETED, PLAYER_NAME_UPDATED
 } from "./types";
 
 export const playerCreated = (name) => {
     return {
         type: PLAYER_CREATED,
+        payload: name
+    };
+};
+
+export const newPlayerNameChange = (name) => {
+    return {
+        type: PLAYER_NAME_UPDATED,
         payload: name
     };
 };

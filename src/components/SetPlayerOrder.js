@@ -1,9 +1,11 @@
 import React, {Component} from 'react';
 import {Button, Card, CardSection} from "../components/common/index";
 import {connect} from 'react-redux';
-import {Platform, Text, Animated, Easing, View, StyleSheet} from "react-native";
-import SortableList from "react-native-sortable-list/src/SortableList";
+import {Platform, Text, Animated, Easing, View, StyleSheet, Dimensions, Image} from "react-native";
+import SortableList from "react-native-sortable-list";
 import {createInitialPlayerOrderList, updatePlayerOrderList} from "../actions";
+
+const window = Dimensions.get('window');
 
 class SetPlayerOrder extends Component {
     static navigationOptions = {
@@ -11,50 +13,46 @@ class SetPlayerOrder extends Component {
         headerStyle: {
             backgroundColor: '#0b7a75'
         },
-        headerTitleStyle:  {
+        headerTitleStyle: {
             color: 'white'
         }
     };
 
+    state = {
+        roster: {0: {name:''}}
+    };
+
     componentWillMount() {
-        console.log('compinent will mount');
-        console.log(this.props);
-        this.props.createInitialPlayerOrderList();
-        this.getData(this.props.sortedPlayerList);
+        this.props.createInitialPlayerOrderList(this.props.roster);
     }
 
     componentWillReceiveProps(nextProps) {
-        console.log('will receive props');
-        console.log(nextProps);
-        this.getData(nextProps.playerList)
-    }
-
-    getData(playerList) {
-        this.dataSource = playerList;
+        this.setState({roster: nextProps.sortedPlayerList});
     }
 
     render() {
         console.log('rendering view');
         return (
             <View style={styles.container}>
+                <Text style={styles.title}>click, hold and drag to change the order</Text>
                 <SortableList
                     style={styles.list}
                     contentContainerStyle={styles.contentContainer}
-                    data={this.getData}
-                    renderRow={this._renderRow} />
+                    data={this.state.roster}
+                    renderRow={this._renderRow}/>
             </View>
         )
     }
 
     _renderRow = ({data, active}) => {
-        return <Row data={data} active={active} />
+        return <Row data={data} active={active}/>
     }
 }
 
 const mapStateToProps = (state) => {
+    console.log('map state in set player order')
     return {
         roster: state.player.roster,
-        playerList: state.player.playerList,
         sortedPlayerList: state.sortOrder.sortedPlayerList
     };
 };
@@ -64,7 +62,6 @@ export default connect(mapStateToProps, {createInitialPlayerOrderList, updatePla
 class Row extends Component {
 
     constructor(props) {
-        console.log('row constructor');
         super(props);
 
         this._active = new Animated.Value(0);
@@ -111,30 +108,15 @@ class Row extends Component {
     }
 
     render() {
-        console.log('rendering row');
-        const {data, active} = this.props;
+        const {data} = this.props;
 
         return (
             <Animated.View style={[
                 styles.row,
                 this._style,
             ]}>
-                <View>
-                    <CardSection style={{backgroundColor: '#05a8aa'}}>
-                        <Text style={styles.nameStyles}>
-                            {data.name}
-                        </Text>
-                    </CardSection>
-                </View>
-                <View>
-                    <CardSection style={{backgroundColor: '#05a8aa', padding: 3}}>
-                        <Text style={styles.textStyles}>
-                            Wins: {data.wins} Losses: {data.losses} {"\n"}
-                            Best Score: {data.bestScore} {"\n"}
-                            Worst Score: {data.worstScore}
-                        </Text>
-                    </CardSection>
-                </View>
+                <Text style={styles.image}/>
+                <Text style={styles.text}>{data.name}</Text>
             </Animated.View>
         );
     }
@@ -153,19 +135,17 @@ const styles = StyleSheet.create({
             },
         }),
     },
-    textStyles: {
-        alignSelf: 'stretch',
-        fontSize: 16,
-        color: 'white',
+
+    title: {
+        fontSize: 12,
+        paddingVertical: 10,
+        color: '#999999',
     },
-    nameStyles: {
-        alignSelf: 'stretch',
-        fontSize: 21,
-        color: 'white',
-    },
+
     list: {
         flex: 1,
     },
+
     contentContainer: {
         width: window.width,
 
@@ -179,6 +159,7 @@ const styles = StyleSheet.create({
             }
         })
     },
+
     row: {
         flexDirection: 'row',
         alignItems: 'center',
@@ -206,5 +187,18 @@ const styles = StyleSheet.create({
                 marginHorizontal: 30,
             },
         })
-    }
+    },
+
+    image: {
+        backgroundColor: 'blue',
+        width: 50,
+        height: 50,
+        marginRight: 30,
+        borderRadius: 25,
+    },
+
+    text: {
+        fontSize: 24,
+        color: '#222222',
+    },
 });

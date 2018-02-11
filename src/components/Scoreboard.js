@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Button } from "../components/common/index";
 import { connect } from 'react-redux';
 import {Text, View} from "react-native";
+import { BackHandler, ToastAndroid, StyleSheet } from "react-native";
 
 class Scoreboard extends Component {
     static navigationOptions = {
@@ -15,13 +16,13 @@ class Scoreboard extends Component {
     };
 
     componentDidMount() {
-        BackAndroid.addEventListener('hardwareBackPress', this.handleBackButton);
+        BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
     }
 
     componentWillUnmount() {
         // TODO prompt user when trying to go back.
         // TODO Add IOS support
-        BackAndroid.removeEventListener('hardwareBackPress', this.handleBackButton);
+        BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
     }
 
     handleBackButton() {

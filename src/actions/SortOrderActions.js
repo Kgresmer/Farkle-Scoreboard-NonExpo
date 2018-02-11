@@ -1,10 +1,10 @@
 import {CREATE_INITIAL_ORDER_LIST, UPDATE_PLAYER_ORDER_LIST} from "./types";
 
-export const createInitialPlayerOrderList = () => {
+export const createInitialPlayerOrderList = (roster) => {
     console.log('create player order list');
     return {
         type: CREATE_INITIAL_ORDER_LIST,
-        payload: ''
+        payload: roster
     };
 };
 

@@ -1,32 +1,55 @@
 import { REHYDRATE } from 'redux-persist/es/constants';
-import { ADD_EXISTING_PLAYER,
+import {
+    ADD_EXISTING_PLAYER,
     DROP_PLAYER,
     PLAYER_CREATED,
-    PLAYER_DELETED} from "../actions/types";
+    PLAYER_DELETED,
+    PLAYER_NAME_UPDATED
+} from "../actions/types";
 
 const INITIAL_STATE = {
     playerList: [],
-    roster: []
+    roster: [],
+    playerName: ''
 };
 
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
+        case PLAYER_NAME_UPDATED:
+            console.log('player name updated reducer')
+            if (action.payload) {
+                return {
+                    ...state,
+                    playerName: action.payload
+                };
+            } else {
+                return {
+                    ...state,
+                    playerName: ''
+                }
+            }
         case PLAYER_CREATED:
-            const t = new Date();
-            const newPlayer = {
-                id: t.getTime(),
-                key: t.getTime(),
-                name: action.payload,
-                wins: 0,
-                losses: 0,
-                bestScore: 0,
-                worstScore: 0
-            };
-            state.playerList.push(newPlayer);
-            state.roster.push(newPlayer);
+            console.log('player created')
+            console.log(action)
+            if (action.payload) {
+                const t = new Date();
+                const newPlayer = {
+                    id: t.getTime(),
+                    key: t.getTime(),
+                    name: action.payload,
+                    wins: 0,
+                    losses: 0,
+                    bestScore: 0,
+                    worstScore: 0
+                };
+                state.playerList.push(newPlayer);
+                state.roster.push(newPlayer);
+            }
+            console.log(state)
             return {
                 playerList: clone(state.playerList),
-                roster: clone(state.roster)
+                roster: clone(state.roster),
+                playerName: ''
             };
         case PLAYER_DELETED:
             console.log('delete player');
@@ -53,6 +76,7 @@ export default (state = INITIAL_STATE, action) => {
             return {
                 playerList: clone(state.playerList),
                 roster: clone(state.roster),
+                playerName: ''
             };
         case DROP_PLAYER:
             console.log('drop player');
@@ -68,7 +92,8 @@ export default (state = INITIAL_STATE, action) => {
                 }
                 return {
                     roster: clone(state.roster),
-                    playerList: clone(state.playerList)
+                    playerList: clone(state.playerList),
+                    playerName: ''
                 };
             } else {
                 return { ...state };
@@ -81,7 +106,8 @@ export default (state = INITIAL_STATE, action) => {
 
             return {
                 playerList: clone(state.playerList),
-                roster: clone(state.roster)
+                roster: clone(state.roster),
+                playerName: ''
             };
         case REHYDRATE:
             console.log('hydrate');
@@ -95,7 +121,8 @@ export default (state = INITIAL_STATE, action) => {
             }
             return {
                 playerList: playerList,
-                roster: roster
+                roster: roster,
+                playerName: ''
             };
         default:
             console.log('default');

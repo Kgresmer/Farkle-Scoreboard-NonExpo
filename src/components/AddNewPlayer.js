@@ -4,40 +4,58 @@ import {CardSection} from './common/CardSection';
 import {Button} from './common/Button';
 import {Card} from "./common/Card";
 import {Input} from "./common/Input";
+import {connect} from "react-redux";
+import {newPlayerNameChange} from "../actions";
 
 class AddNewPlayer extends Component {
 
-    state = {name: '', errorMessage: ''};
+    state = {errorMessage: ''};
 
     componentWillMount() {
-        console.log(' add new player mounted')
-        console.log(this.props)
+
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.playerName === '' && this.props.playerName.length > 0) {
+            this.setState({errorMessage: 'You cannot have a player with an empty name'});
+        } else if (nextProps.playerName.length >= 19) {
+            this.setState({errorMessage: 'You have reached the character limit'});
+        } else {
+            this.setState({errorMessage: ''})
+        }
     }
 
     addNewPlayer() {
-        if (this.state.name === '') {
-            this.state.errorMessage = 'You cannot enter an empty name';
-            setTimeout(() => {
-                this.state.errorMessage = '';
-            }, 2500)
-        } else if (this.state.name.length >= 20) {
-            this.state.errorMessage = 'You cannot enter an name greater than 20 characters';
-            setTimeout(() => {
-                this.state.errorMessage = '';
-            }, 2500)
-        } else {
-            this.props.addPlayer(this.state.name);
-            this.props.closeModal();
-        }
+        this.props.addPlayer(this.props.playerName);
+        this.props.closeModal();
+        this.setState({errorMessage: ''});
+    }
+
+    onInputChange(value) {
+        console.log(value);
+        this.props.newPlayerNameChange(value);
     }
 
     cancelAddNewPlayer() {
         this.props.closeModal();
     };
 
-    showErrorMessage() {
-        if (this.state.errorMessage) {
-            return (<Text>{this.state.errorMessage}</Text>);
+    checkForInvalidName() {
+        if (this.props.playerName === '') {
+            return (
+                <Button
+                    disabled={true}
+                    buttonStyleDyn={{backgroundColor: 'rgba(232,209,161,0.40)'}}
+                    onPress={this.addNewPlayer.bind(this)}>
+                    Add</Button>
+            )
+        } else {
+            return (
+                <Button
+                    buttonStyleDyn={{backgroundColor: '#05a8aa'}}
+                    onPress={this.addNewPlayer.bind(this)}>
+                    Add</Button>
+            )
         }
     }
 
@@ -59,23 +77,22 @@ class AddNewPlayer extends Component {
                             <CardSection>
                                 <Input
                                     label=""
-                                    maxLength="20"
+                                    maxLength={20}
                                     keyboardType="default"
                                     placeholder="Name"
-                                    onChangeText={value => this.setState({name: value})}
+                                    onChangeText={(value) => this.onInputChange(value)}
                                 />
                             </CardSection>
                         </Card>
-                        {this.showErrorMessage()}
+                        <View>
+                            <Text style={styles.errorMessage}>{this.state.errorMessage}</Text>
+                        </View>
                         <CardSection>
                             <Button
                                 buttonStyleDyn={{backgroundColor: '#ea651d'}}
                                 onPress={this.cancelAddNewPlayer.bind(this)}>
                                 Cancel</Button>
-                            <Button
-                                buttonStyleDyn={{backgroundColor: '#05a8aa'}}
-                                onPress={this.addNewPlayer.bind(this)}>
-                                Add</Button>
+                            {this.checkForInvalidName()}
                         </CardSection>
                     </Card>
                 </View>
@@ -112,7 +129,22 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
+    },
+    errorMessage: {
+        color: 'white',
+        paddingLeft: 10,
+        paddingRight: 10
     }
 });
 
-export default AddNewPlayer;
+const mapStateToProps = (state) => {
+    console.log('map state to props in add new player')
+    console.log(state);
+    return {
+        roster: state.player.roster,
+        playerList: state.player.playerList,
+        playerName: state.player.playerName
+    };
+};
+
+export default connect(mapStateToProps, {newPlayerNameChange})(AddNewPlayer);

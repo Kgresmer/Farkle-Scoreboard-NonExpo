@@ -1,6 +1,5 @@
 import {CREATE_INITIAL_ORDER_LIST, UPDATE_PLAYER_ORDER_LIST} from "../actions/types";
 const INITIAL_STATE = {
-    playerList: [],
     roster: [],
     sortedPlayerList: []
 };
@@ -16,13 +15,14 @@ export default (state = INITIAL_STATE, action) => {
             };
         case CREATE_INITIAL_ORDER_LIST:
             console.log('create player sort list');
+            console.log(action.payload)
             const initialPlayerList = {};
-            state.roster.map((player, index) => {
+            action.payload.map((player, index) => {
                 initialPlayerList[index] = player;
             });
 
             return {
-                ...state,
+                roster: action.payload,
                 sortedPlayerList: initialPlayerList
             };
         default:

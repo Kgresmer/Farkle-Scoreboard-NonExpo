@@ -52,13 +52,14 @@ const styles = {
         alignSelf: 'center',
         fontSize: 16,
         lineHeight: 20,
-        color: 'white',
+        color: 'white'
     },
     nameStyles: {
         alignSelf: 'center',
         fontSize: 21,
         lineHeight: 30,
         color: 'white',
+        paddingBottom: 7
     },
     removeButtonStyle: {
         alignSelf: 'center',

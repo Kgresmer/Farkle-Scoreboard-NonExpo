@@ -30,7 +30,6 @@ export default (state = INITIAL_STATE, action) => {
             }
         case PLAYER_CREATED:
             console.log('player created')
-            console.log(action)
             if (action.payload) {
                 const t = new Date();
                 const newPlayer = {
@@ -45,7 +44,6 @@ export default (state = INITIAL_STATE, action) => {
                 state.playerList.push(newPlayer);
                 state.roster.push(newPlayer);
             }
-            console.log(state)
             return {
                 playerList: clone(state.playerList),
                 roster: clone(state.roster),
@@ -62,7 +60,6 @@ export default (state = INITIAL_STATE, action) => {
             if (playerListIndexDrop !== -1) {
                 state.playerList.splice(playerListIndexDrop, 1);
             }
-
             let rosterIndexDrop = -1;
             state.roster.map((player, index) => {
                 if (player.id === action.payload) {
@@ -72,7 +69,6 @@ export default (state = INITIAL_STATE, action) => {
             if (rosterIndexDrop !== -1) {
                 state.roster.splice(rosterIndexDrop, 1);
             }
-
             return {
                 playerList: clone(state.playerList),
                 roster: clone(state.roster),

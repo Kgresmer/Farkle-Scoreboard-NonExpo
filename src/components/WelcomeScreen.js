@@ -20,7 +20,7 @@ class WelcomeScreen extends Component {
             <View>
                 <CardSection>
                     <Text style={styles.titleStyles}>
-                        Welcome to Farkle Score
+                        Welcome to Farkle Scoreboard
                     </Text>
                 </CardSection>
             </View>

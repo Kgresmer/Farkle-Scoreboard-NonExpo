@@ -20,12 +20,11 @@ class Scoreboard extends Component {
     }
 
     componentWillUnmount() {
-        // TODO prompt user when trying to go back.
-        // TODO Add IOS support
         BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
     }
 
     handleBackButton() {
+        // TODO prompt user when trying to go back.
         ToastAndroid.show('Back button is pressed', ToastAndroid.SHORT);
         return true; //return true to block back button
     }

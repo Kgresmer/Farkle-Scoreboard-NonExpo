@@ -45,7 +45,6 @@ class SetPlayerOrder extends Component {
     }
 
     render() {
-        console.log('rendering view');
         return (
             <View style={styles.container}>
                 <Text style={styles.title}>click, hold and drag to change the order</Text>
@@ -75,7 +74,6 @@ class SetPlayerOrder extends Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log('map state in set player order')
     return {
         roster: state.player.roster,
         sortedPlayerList: state.sortOrder.sortedPlayerList

@@ -92,8 +92,6 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state) => {
-    console.log('map state in existing');
-    console.log(state);
     return {roster: state.player.roster, playerList: state.player.playerList};
 };
 

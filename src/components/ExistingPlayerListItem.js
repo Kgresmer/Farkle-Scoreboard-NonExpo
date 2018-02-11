@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {Text, View} from "react-native";
+import {Text, ToastAndroid, View} from "react-native";
 import {Button, Confirm} from "./common";
 
 
@@ -38,6 +38,7 @@ class ExistingPlayerListItem extends Component {
     onAccept() {
         this.props.deletePlayer(this.props.player.id);
         this.setState({showModal: false});
+        ToastAndroid.show('They are gone!', ToastAndroid.SHORT);
     }
 
     onDecline() {

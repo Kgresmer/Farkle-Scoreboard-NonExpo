@@ -32,7 +32,6 @@ class AddNewPlayer extends Component {
     }
 
     onInputChange(value) {
-        console.log(value);
         this.props.newPlayerNameChange(value);
     }
 
@@ -138,8 +137,6 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state) => {
-    console.log('map state to props in add new player')
-    console.log(state);
     return {
         roster: state.player.roster,
         playerList: state.player.playerList,

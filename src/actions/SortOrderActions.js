@@ -1,4 +1,4 @@
-import {CREATE_INITIAL_ORDER_LIST, UPDATE_PLAYER_ORDER_LIST} from "./types";
+import {CREATE_INITIAL_ORDER_LIST, SEND_PLAYER_ORDER_LIST} from "./types";
 
 export const createInitialPlayerOrderList = (roster) => {
     console.log('create player order list');
@@ -8,11 +8,11 @@ export const createInitialPlayerOrderList = (roster) => {
     };
 };
 
-export const updatePlayerOrderList = (id) => {
+export const updatePlayerOrderList = (newRoster) => {
     console.log('update order list action');
     return {
-        type: UPDATE_PLAYER_ORDER_LIST,
-        payload: id
+        type: SEND_PLAYER_ORDER_LIST,
+        payload: newRoster
     };
 };
 

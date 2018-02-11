@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import {Button, Card, CardSection} from "../components/common/index";
+import {Button} from "../components/common/index";
 import {connect} from 'react-redux';
-import {Platform, Text, Animated, Easing, View, StyleSheet, Dimensions, Image} from "react-native";
+import {Platform, Text, Animated, Easing, View, StyleSheet, Dimensions} from "react-native";
 import SortableList from "react-native-sortable-list";
 import {createInitialPlayerOrderList, updatePlayerOrderList} from "../actions";
 
@@ -19,7 +19,8 @@ class SetPlayerOrder extends Component {
     };
 
     state = {
-        roster: {0: {name:''}}
+        roster: {0: {name:''}},
+        sortOrder: []
     };
 
     componentWillMount() {
@@ -30,16 +31,40 @@ class SetPlayerOrder extends Component {
         this.setState({roster: nextProps.sortedPlayerList});
     }
 
+    onOrderChange(nextOrder) {
+        this.setState({sortOrder: nextOrder, roster: this.state.roster});
+    }
+
+    onReadyButtonPress() {
+        const newRoster = {};
+        for (let i = 0; i < this.state.sortOrder.length; i++) {
+            newRoster[i] = this.state.roster[this.state.sortOrder[i]];
+        }
+        this.props.updatePlayerOrderList(newRoster);
+        this.props.navigation.navigate('Scoreboard');
+    }
+
     render() {
         console.log('rendering view');
         return (
             <View style={styles.container}>
                 <Text style={styles.title}>click, hold and drag to change the order</Text>
+                <View style={{flex: 1, flexDirection: 'row'}}>
                 <SortableList
                     style={styles.list}
                     contentContainerStyle={styles.contentContainer}
+                    onChangeOrder={this.onOrderChange.bind(this)}
                     data={this.state.roster}
                     renderRow={this._renderRow}/>
+                </View>
+                <View style={{flexDirection: 'row'}}>
+                    <View style={{flex: 1}}>
+                        <Button
+                            onPress={this.onReadyButtonPress.bind(this)}>
+                            Ready!
+                        </Button>
+                    </View>
+                </View>
             </View>
         )
     }
@@ -63,9 +88,7 @@ class Row extends Component {
 
     constructor(props) {
         super(props);
-
         this._active = new Animated.Value(0);
-
         this._style = {
             ...Platform.select({
                 ios: {
@@ -80,7 +103,6 @@ class Row extends Component {
                         outputRange: [2, 10],
                     }),
                 },
-
                 android: {
                     transform: [{
                         scale: this._active.interpolate({
@@ -109,7 +131,6 @@ class Row extends Component {
 
     render() {
         const {data} = this.props;
-
         return (
             <Animated.View style={[
                 styles.row,
@@ -125,7 +146,8 @@ class Row extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
+        flexDirection: 'column',
+        justifyContent: 'flex-end',
         alignItems: 'center',
         backgroundColor: '#eee',
 
@@ -135,17 +157,14 @@ const styles = StyleSheet.create({
             },
         }),
     },
-
     title: {
         fontSize: 12,
         paddingVertical: 10,
         color: '#999999',
     },
-
     list: {
         flex: 1,
     },
-
     contentContainer: {
         width: window.width,
 
@@ -159,19 +178,16 @@ const styles = StyleSheet.create({
             }
         })
     },
-
     row: {
         flexDirection: 'row',
         alignItems: 'center',
         backgroundColor: '#fff',
-        padding: 16,
+        padding: 11,
         height: 80,
         flex: 1,
-        marginTop: 7,
-        marginBottom: 12,
+        marginTop: 5,
+        marginBottom: 10,
         borderRadius: 4,
-
-
         ...Platform.select({
             ios: {
                 width: window.width - 30 * 2,
@@ -180,7 +196,6 @@ const styles = StyleSheet.create({
                 shadowOffset: {height: 2, width: 2},
                 shadowRadius: 2,
             },
-
             android: {
                 width: window.width - 30 * 2,
                 elevation: 0,
@@ -188,7 +203,6 @@ const styles = StyleSheet.create({
             },
         })
     },
-
     image: {
         backgroundColor: 'blue',
         width: 50,
@@ -196,7 +210,6 @@ const styles = StyleSheet.create({
         marginRight: 30,
         borderRadius: 25,
     },
-
     text: {
         fontSize: 24,
         color: '#222222',

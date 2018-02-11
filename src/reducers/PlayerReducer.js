@@ -113,11 +113,11 @@ export default (state = INITIAL_STATE, action) => {
             console.log('hydrate');
             let playerList = [];
             let roster = [];
-            if (action.payload && action.payload.playerList) {
-                playerList = action.payload.playerList;
+            if (action.payload && action.payload.player.playerList) {
+                playerList = action.payload.player.playerList;
             }
-            if (action.payload && action.payload.roster) {
-                roster = action.payload.roster;
+            if (action.payload && action.payload.player.roster) {
+                roster = action.payload.player.roster;
             }
             return {
                 playerList: playerList,

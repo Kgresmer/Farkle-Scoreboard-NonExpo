@@ -4,16 +4,13 @@ import {connect} from 'react-redux';
 import { FlatList, Text, View} from "react-native";
 import {BackHandler, ToastAndroid, StyleSheet} from "react-native";
 import {Confirm, Input} from "./common";
+import ScoreboardListItem from "./ScoreboardListItem";
+import ScoreboardTitle from "./ScoreboardTitle";
 
 class Scoreboard extends Component {
     static navigationOptions = {
-        title: 'Scoreboard',
-        headerStyle: {
-            backgroundColor: '#0b7a75'
-        },
-        headerTitleStyle: {
-            color: 'white'
-        }
+        headerLeft: null,
+        headerTitle: <ScoreboardTitle/>
     };
 
     state = {showModal: false};

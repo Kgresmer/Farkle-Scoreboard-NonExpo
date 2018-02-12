@@ -27,6 +27,7 @@ class ScoreboardListItem extends Component {
                     color="#C70039"
                 />
                 <Icon
+                    size="20"
                     raised
                     name="fa-times-circle"
                     type="font-awesome"

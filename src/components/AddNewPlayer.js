@@ -18,7 +18,7 @@ class AddNewPlayer extends Component {
     componentWillReceiveProps(nextProps) {
         if (nextProps.playerName === '' && this.props.playerName.length > 0) {
             this.setState({errorMessage: 'You cannot have a player with an empty name'});
-        } else if (nextProps.playerName.length >= 19) {
+        } else if (nextProps.playerName.length === 15) {
             this.setState({errorMessage: 'You have reached the character limit'});
         } else {
             this.setState({errorMessage: ''})
@@ -76,7 +76,7 @@ class AddNewPlayer extends Component {
                             <CardSection>
                                 <Input
                                     label=""
-                                    maxLength={20}
+                                    maxLength={15}
                                     keyboardType="default"
                                     placeholder="Name"
                                     onChangeText={(value) => this.onInputChange(value)}

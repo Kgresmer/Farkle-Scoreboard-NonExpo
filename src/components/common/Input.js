@@ -9,6 +9,7 @@ const Input = (
         secureTextEntry,
         keyboardType,
         style,
+        inputDynStyle,
         maxLength
     }) => {
     const { inputStyle, labelStyle, containerStyle } = styles;
@@ -20,7 +21,7 @@ const Input = (
                 placeholder={placeholder}
                 placeholderTextColor={'rgba(255,255,255, 0.7)'}
                 autoCorrect={false}
-                style={inputStyle}
+                style={[inputStyle, inputDynStyle]}
                 value={value}
                 maxLength={maxLength}
                 onChangeText={onChangeText}

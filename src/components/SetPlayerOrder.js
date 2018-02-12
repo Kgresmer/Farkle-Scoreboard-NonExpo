@@ -59,6 +59,7 @@ class SetPlayerOrder extends Component {
                 <View style={{flexDirection: 'row'}}>
                     <View style={{flex: 1}}>
                         <Button
+                            textStyleDyn={styles.readyButtonTextStyle}
                             onPress={this.onReadyButtonPress.bind(this)}>
                             Ready!
                         </Button>
@@ -154,6 +155,11 @@ const styles = StyleSheet.create({
                 paddingTop: 20,
             },
         }),
+    },
+    readyButtonTextStyle: {
+        fontSize: 30,
+        paddingTop: 6,
+        paddingBottom: 6,
     },
     title: {
         fontSize: 12,

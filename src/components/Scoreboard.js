@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
-import { Button } from "../components/common/index";
-import { connect } from 'react-redux';
-import {Text, View} from "react-native";
-import { BackHandler, ToastAndroid, StyleSheet } from "react-native";
+import React, {Component} from 'react';
+import {Button} from "../components/common/index";
+import {connect} from 'react-redux';
+import {Dimensions, Text, View} from "react-native";
+import {BackHandler, ToastAndroid, StyleSheet} from "react-native";
+import {Confirm, Input} from "./common";
 
 class Scoreboard extends Component {
     static navigationOptions = {
@@ -10,10 +11,12 @@ class Scoreboard extends Component {
         headerStyle: {
             backgroundColor: '#0b7a75'
         },
-        headerTitleStyle:  {
+        headerTitleStyle: {
             color: 'white'
         }
     };
+
+    state = {showModal: false};
 
     componentDidMount() {
         BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
@@ -24,15 +27,53 @@ class Scoreboard extends Component {
     }
 
     handleBackButton() {
-        // TODO prompt user when trying to go back.
-        ToastAndroid.show('Back button is pressed', ToastAndroid.SHORT);
-        return true; //return true to block back button
+        return true;
     }
 
     render() {
         return (
             <View style={styles.mainContainer}>
-                <Text>Scoreboard</Text>
+                <View style={{flexDirection: 'row'}}>
+                    <View style={styles.displaySection}>
+                        <Text style={{fontSize: 18}}>Kevin's Turn</Text>
+                    </View>
+                </View>
+                <View style={{flexDirection: 'row'}}>
+                    <View style={styles.inputCard}>
+                        <Input
+                            label=""
+                            inputDynStyle={{fontSize: 16, lineHeight: 21, color: 'black', borderWidth: 1,
+                                borderColor: '#0b7a75'}}
+                            maxLength={6}
+                            keyboardType="default"
+                            placeholder="Name"
+                            onChangeText={() => {
+                            }}
+                        />
+                    </View>
+                </View>
+                <View style={{flexDirection: 'row'}}>
+                    <Button
+                        buttonStyleDyn={{flex: 1}}
+                        onPress={() => {
+                        }}>
+                        Farkel
+                    </Button>
+                    <Button
+                        buttonStyleDyn={{flex: 1}}
+                        onPress={() => {
+                        }}>
+                        Score It
+                    </Button>
+                </View>
+                <Confirm
+                    visible={this.state.showModal}
+                    onAccept={() => {}}
+                    onDecline={() => {}}
+                >
+                    Are you sure you want to exit the game?{'\n'}
+                    All of the scores will be reset.
+                </Confirm>
             </View>
         )
     }
@@ -47,13 +88,25 @@ const styles = StyleSheet.create({
         paddingBottom: 10,
         paddingLeft: 5,
         paddingRight: 5
-    }
-
+    },
+    displaySection: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    inputCard: {
+        flex: 2,
+        padding: 8,
+        borderWidth: 0,
+        height: 100
+    },
 });
 
-
-const mapStateToProps = (state) => {
-    return {};
-};
+// const mapStateToProps = (state) => {
+//     return {
+//         roster: state.player.roster,
+//         sortedPlayerList: state.sortOrder.sortedPlayerList
+//     };
+// };
 
 export default Scoreboard;

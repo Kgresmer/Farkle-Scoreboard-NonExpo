@@ -40,7 +40,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginLeft: 35,
         marginRight: 35,
-        borderRadius: 5
+        borderRadius: 5,
+        overflow: 'hidden'
     },
     textStyles: {
         flex: 1,

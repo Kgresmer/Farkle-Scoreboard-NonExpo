@@ -13,7 +13,8 @@ const Card = ({children, dynamicStyles}) => {
 const styles = StyleSheet.create({
     containerStyle: {
         borderWidth: 1,
-        borderRadius: 2, //at any corners round them
+        borderRadius: 2,
+        overflow: 'hidden',
         borderColor: 'rgba(255,255,255,0.75)',
         backgroundColor: '#0b7a75',
         shadowOffset: { width: 0, height: 4 },

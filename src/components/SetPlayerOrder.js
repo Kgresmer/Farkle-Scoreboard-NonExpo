@@ -135,7 +135,6 @@ class Row extends Component {
                 styles.row,
                 this._style,
             ]}>
-                <Text style={styles.image}/>
                 <Text style={styles.text}>{data.name}</Text>
             </Animated.View>
         );
@@ -148,7 +147,7 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         justifyContent: 'flex-end',
         alignItems: 'center',
-        backgroundColor: '#eee',
+        backgroundColor: '#05a8aa',
 
         ...Platform.select({
             ios: {
@@ -192,6 +191,7 @@ const styles = StyleSheet.create({
         marginTop: 5,
         marginBottom: 10,
         borderRadius: 4,
+        overflow: 'hidden',
         ...Platform.select({
             ios: {
                 width: window.width - 30 * 2,
@@ -207,15 +207,8 @@ const styles = StyleSheet.create({
             },
         })
     },
-    image: {
-        backgroundColor: 'blue',
-        width: 50,
-        height: 50,
-        marginRight: 30,
-        borderRadius: 25,
-    },
     text: {
         fontSize: 24,
-        color: '#222222',
+        color: 'white',
     },
 });

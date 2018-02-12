@@ -24,6 +24,7 @@ const styles = StyleSheet.create({
         alignSelf: 'stretch', //stretch to fill the limits of the container
         backgroundColor: '#0b7a75',
         borderRadius: 5,
+        overflow: 'hidden',
         borderWidth: 1,
         borderColor: 'white',
         marginLeft: 5,

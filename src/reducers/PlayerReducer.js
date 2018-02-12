@@ -105,21 +105,21 @@ export default (state = INITIAL_STATE, action) => {
                 roster: clone(state.roster),
                 playerName: ''
             };
-        case REHYDRATE:
-            console.log('hydrate');
-            let playerList = [];
-            let roster = [];
-            if (action.payload && action.payload.player.playerList) {
-                playerList = action.payload.player.playerList;
-            }
-            if (action.payload && action.payload.player.roster) {
-                roster = action.payload.player.roster;
-            }
-            return {
-                playerList: playerList,
-                roster: roster,
-                playerName: ''
-            };
+        // case REHYDRATE:
+        //     console.log('hydrate');
+        //     let playerList = [];
+        //     let roster = [];
+        //     if (action.payload && action.payload.player.playerList) {
+        //         playerList = action.payload.player.playerList;
+        //     }
+        //     if (action.payload && action.payload.player.roster) {
+        //         roster = action.payload.player.roster;
+        //     }
+        //     return {
+        //         playerList: playerList,
+        //         roster: roster,
+        //         playerName: ''
+        //     };
         default:
             console.log('default');
             return { ...state};

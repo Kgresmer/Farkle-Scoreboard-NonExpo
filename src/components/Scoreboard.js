@@ -58,7 +58,7 @@ class Scoreboard extends Component {
                 </View>
                 <View style={{flexDirection: 'row'}}>
                     <View style={styles.displaySection}>
-                        <Text style={{fontSize: 18}}>Kevin's Turn</Text>
+                        <Text style={styles.playerNameStyle}>Kevin's Turn</Text>
                     </View>
                 </View>
                 <View style={{flexDirection: 'row'}}>
@@ -77,12 +77,14 @@ class Scoreboard extends Component {
                 <View style={{flexDirection: 'row'}}>
                     <Button
                         buttonStyleDyn={{flex: 1}}
+                        textStyleDyn={{fontSize: 18}}
                         onPress={() => {
                         }}>
                         Farkel
                     </Button>
                     <Button
                         buttonStyleDyn={{flex: 1}}
+                        textStyleDyn={{fontSize: 18}}
                         onPress={() => {
                         }}>
                         Score It
@@ -128,6 +130,11 @@ const styles = StyleSheet.create({
         lineHeight: 21,
         borderWidth: 1,
         borderColor: '#89ae6d'
+    },
+    playerNameStyle: {
+        fontSize: 18,
+        lineHeight: 23,
+        color: 'white'
     }
 });
 

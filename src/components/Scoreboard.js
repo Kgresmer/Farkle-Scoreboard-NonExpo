@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Button} from "../components/common/index";
 import {connect} from 'react-redux';
-import {Dimensions, Text, View} from "react-native";
+import { FlatList, Text, View} from "react-native";
 import {BackHandler, ToastAndroid, StyleSheet} from "react-native";
 import {Confirm, Input} from "./common";
 
@@ -30,9 +30,35 @@ class Scoreboard extends Component {
         return true;
     }
 
+    componentWillMount() {
+        this.createDataSource(this.props.roster, this.props.sortedPlayerList);
+    }
+
+    componentWillReceiveProps(nextProps) {
+        this.createDataSource(nextProps.roster, nextProps.sortedPlayerList);
+    }
+
+    createDataSource(roster, sortedPlayerListObject) {
+        const dataSource = [];
+        for (let i = 0; i < roster.length; i++) {
+            dataSource[i] = sortedPlayerListObject[i];
+        }
+        this.dataSource = dataSource;
+    }
+
+    renderRow({item}) {
+        return <ScoreboardListItem dropPlayer={this.dropPlayer.bind(this)} player={item}/>;
+    }
+
     render() {
         return (
             <View style={styles.mainContainer}>
+                <View style={{flex: 1, flexDirection: 'row'}}>
+                    <FlatList
+                        data={this.dataSource}
+                        renderItem={this.renderRow.bind(this)}
+                    />
+                </View>
                 <View style={{flexDirection: 'row'}}>
                     <View style={styles.displaySection}>
                         <Text style={{fontSize: 18}}>Kevin's Turn</Text>
@@ -42,8 +68,7 @@ class Scoreboard extends Component {
                     <View style={styles.inputCard}>
                         <Input
                             label=""
-                            inputDynStyle={{fontSize: 16, lineHeight: 21, color: 'black', borderWidth: 1,
-                                borderColor: '#0b7a75'}}
+                            inputDynStyle={styles.inputDynStyle}
                             maxLength={6}
                             keyboardType="default"
                             placeholder="Name"
@@ -87,7 +112,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         paddingBottom: 10,
         paddingLeft: 5,
-        paddingRight: 5
+        paddingRight: 5,
+        backgroundColor: '#0b7a75'
     },
     displaySection: {
         flex: 1,
@@ -98,15 +124,21 @@ const styles = StyleSheet.create({
         flex: 2,
         padding: 8,
         borderWidth: 0,
-        height: 100
+        height: 70
     },
+    inputDynStyle: {
+        fontSize: 16,
+        lineHeight: 21,
+        borderWidth: 1,
+        borderColor: '#89ae6d'
+    }
 });
 
-// const mapStateToProps = (state) => {
-//     return {
-//         roster: state.player.roster,
-//         sortedPlayerList: state.sortOrder.sortedPlayerList
-//     };
-// };
+const mapStateToProps = (state) => {
+    return {
+        roster: state.player.roster,
+        sortedPlayerList: state.sortOrder.sortedPlayerList
+    };
+};
 
-export default Scoreboard;
+export default connect(mapStateToProps, {})(Scoreboard);

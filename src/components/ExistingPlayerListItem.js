@@ -51,18 +51,23 @@ class ExistingPlayerListItem extends Component {
             <View style={styles.container}>
                 <Text style={styles.nameStyles}>
                     {player.name}{"\n"}
-                    <Text style={styles.textStyles}>
-                        Wins: {player.wins} Losses: {player.losses}{"\n"}
-                        Best Score: {player.bestScore} Worst Score: {player.worstScore}
-                    </Text>
+
                 </Text>
+                <View style={{alignItems: 'flex-end'}}>
+                    {this.checkIfPlayerIsOnRoster()}
+                </View>
                 <View style={{alignItems: 'flex-end'}}>
                     <Button
                         buttonStyleDyn={styles.removeButtonStyle}
                         onPress={this.deletePlayer.bind(this)}>
-                        Delete
+                        x
                     </Button>
-                    {this.checkIfPlayerIsOnRoster()}
+                </View>
+                <View style={{flexDirection: 'row'}}>
+                    <Text style={styles.textStyles}>
+                        Wins: {player.wins} Losses: {player.losses}{"\n"}
+                        Best Score: {player.bestScore} Worst Score: {player.worstScore}
+                    </Text>
                 </View>
                 <Confirm
                     visible={this.state.showModal}
@@ -109,7 +114,7 @@ const styles = {
     removeButtonStyle: {
         alignSelf: 'center',
         backgroundColor: '#C70039',
-        width: 90,
+        width: 30,
         marginTop: 1
     },
     addButtonStyle: {

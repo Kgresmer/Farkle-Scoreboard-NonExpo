@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import {Text, View, Modal, StyleSheet, FlatList} from 'react-native';
-import {CardSection, Button, Card} from './common';
+import {CardSection, Button, Card} from '../common';
 import { connect } from 'react-redux';
-import { addExistingPlayerToRoster, playerDeleted, removePlayerFromRoster } from '../actions';
+import { addExistingPlayerToRoster, playerDeleted, removePlayerFromRoster } from '../../actions';
 import ExistingPlayerListItem from "./ExistingPlayerListItem";
 
 

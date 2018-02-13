@@ -14,22 +14,20 @@ class ScoreboardListItem extends Component {
         return (
             <View style={styles.itemContainer}>
                 <Text style={styles.nameStyles}>
-                    {player.name}
+                    {player.name}: <Text style={styles.scoreStyles}>10400</Text>
                 </Text>
-                <Text style={styles.scoreStyles}>
-                    10400
-                </Text>
-                <View>
+
+                <View style={{flexDirection: 'row'}}>
                     <Icon
                         raised
-                        size="10"
+                        size={10}
                         name="times-circle"
                         type="font-awesome"
                         color="#C70039"
                     />
                     <Icon
                         raised
-                        size="10"
+                        size={10}
                         name="times-circle"
                         type="font-awesome"
                         color="#C70039"
@@ -59,16 +57,15 @@ const styles = {
         elevation: 3,
     },
     nameStyles: {
-        alignSelf: 'center',
-        fontSize: 20,
-        lineHeight: 20,
+        fontSize: 24,
+        lineHeight: 33,
         color: 'white',
-        paddingBottom: 7
+        padding: 5
     },
     scoreStyles: {
         alignSelf: 'center',
-        fontSize: 22,
-        lineHeight: 24,
+        fontSize: 28,
+        lineHeight: 33,
         color: 'white',
         paddingBottom: 7
     },

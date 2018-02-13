@@ -156,7 +156,7 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         justifyContent: 'flex-end',
         alignItems: 'center',
-        backgroundColor: '#05a8aa',
+        backgroundColor: 'white',
 
         ...Platform.select({
             ios: {
@@ -193,7 +193,7 @@ const styles = StyleSheet.create({
     row: {
         flexDirection: 'row',
         alignItems: 'center',
-        backgroundColor: '#fff',
+        backgroundColor: '#05a8aa',
         padding: 11,
         height: 80,
         flex: 1,

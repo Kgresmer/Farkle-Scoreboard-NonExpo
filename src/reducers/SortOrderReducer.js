@@ -26,8 +26,7 @@ export default (state = INITIAL_STATE, action) => {
                 sortedPlayerList: initialPlayerList
             };
         default:
-            console.log('sort list default');
-            return { ...state};
+            return {...state};
     }
 }
 

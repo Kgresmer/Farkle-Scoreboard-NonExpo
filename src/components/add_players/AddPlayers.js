@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
-import {Button} from "../components/common";
+import {Button} from "../../components/common";
 import {StyleSheet, View, FlatList, Text, BackHandler, ToastAndroid} from "react-native";
 import PlayerListItem from "./PlayerListItem";
 import AddNewPlayer from "./AddNewPlayer";
 import {connect} from 'react-redux';
-import {removePlayerFromRoster, playerCreated} from "../actions";
+import {removePlayerFromRoster, playerCreated} from "../../actions";
 
 class AddPlayers extends Component {
     static navigationOptions = {

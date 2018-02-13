@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import {Text, View, Modal, StyleSheet, Dimensions} from 'react-native';
-import {CardSection} from './common/CardSection';
-import {Button} from './common/Button';
-import {Card} from "./common/Card";
-import {Input} from "./common/Input";
+import {CardSection} from '../common/CardSection';
+import {Button} from '../common/Button';
+import {Card} from "../common/Card";
+import {Input} from "../common/Input";
 import {connect} from "react-redux";
 import {newPlayerNameChange} from "../actions";
 

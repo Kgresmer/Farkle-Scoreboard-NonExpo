@@ -1,10 +1,10 @@
 import SetPlayerOrder from "./components/SetPlayerOrder";
-import Scoreboard from "./components/Scoreboard";
+import Scoreboard from "./components/scoreboard/Scoreboard";
 import GameOver from "./components/GameOver";
 import WelcomeScreen from "./components/WelcomeScreen";
-import AddPlayers from "./components/AddPlayers";
+import AddPlayers from "./components/add_players/AddPlayers";
 import {StackNavigator} from "react-navigation";
-import AddExistingPlayer from "./components/AddExistingPlayer";
+import AddExistingPlayer from "./components/add_players/AddExistingPlayer";
 
 const SimpleApp = StackNavigator({
     WelcomeScreen: {screen: WelcomeScreen},

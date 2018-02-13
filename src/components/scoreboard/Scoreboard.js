@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Button} from "../components/common/index";
+import {Button} from "../common/index";
 import {connect} from 'react-redux';
 import { FlatList, Text, View} from "react-native";
 import {BackHandler, ToastAndroid, StyleSheet} from "react-native";
@@ -76,14 +76,14 @@ class Scoreboard extends Component {
                 </View>
                 <View style={{flexDirection: 'row'}}>
                     <Button
-                        buttonStyleDyn={{flex: 1}}
+                        buttonStyleDyn={{flex: 1, backgroundColor: '#05a8aa'}}
                         textStyleDyn={{fontSize: 22}}
                         onPress={() => {
                         }}>
                         Farkel
                     </Button>
                     <Button
-                        buttonStyleDyn={{flex: 1}}
+                        buttonStyleDyn={{flex: 1, backgroundColor: '#05a8aa'}}
                         textStyleDyn={{fontSize: 22}}
                         onPress={() => {
                         }}>
@@ -123,13 +123,12 @@ const styles = StyleSheet.create({
         flex: 2,
         padding: 8,
         borderWidth: 0,
-        height: 70
+        height: 70,
+        backgroundColor: '#05a8aa'
     },
     inputDynStyle: {
         fontSize: 16,
         lineHeight: 21,
-        borderWidth: 1,
-        borderColor: '#89ae6d'
     },
     playerNameStyle: {
         fontSize: 18,

@@ -53,10 +53,8 @@ class ExistingPlayerListItem extends Component {
                     {player.name}{"\n"}
 
                 </Text>
-                <View style={{alignItems: 'flex-end'}}>
+                <View style={{flexDirection: 'column', justifyContent: 'center', alignItems: 'flex-end'}}>
                     {this.checkIfPlayerIsOnRoster()}
-                </View>
-                <View style={{alignItems: 'flex-end'}}>
                     <Button
                         buttonStyleDyn={styles.removeButtonStyle}
                         onPress={this.deletePlayer.bind(this)}>
@@ -113,7 +111,7 @@ const styles = {
         color: 'white',
     },
     removeButtonStyle: {
-        alignSelf: 'center',
+        alignSelf: 'flex-end',
         backgroundColor: '#C70039',
         width: 30,
         marginTop: 1

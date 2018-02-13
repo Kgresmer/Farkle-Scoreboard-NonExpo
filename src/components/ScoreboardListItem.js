@@ -1,6 +1,5 @@
 import React, {Component} from "react";
 import {Text, View} from "react-native";
-import {Button} from "./common";
 import {Icon} from 'react-native-elements';
 
 
@@ -20,19 +19,22 @@ class ScoreboardListItem extends Component {
                 <Text style={styles.scoreStyles}>
                     10400
                 </Text>
-                <Icon
-                    raised
-                    name="fa-times-circle"
-                    type="font-awesome"
-                    color="#C70039"
-                />
-                <Icon
-                    size="20"
-                    raised
-                    name="fa-times-circle"
-                    type="font-awesome"
-                    color="#C70039"
-                />
+                <View>
+                    <Icon
+                        raised
+                        size="10"
+                        name="times-circle"
+                        type="font-awesome"
+                        color="#C70039"
+                    />
+                    <Icon
+                        raised
+                        size="10"
+                        name="times-circle"
+                        type="font-awesome"
+                        color="#C70039"
+                    />
+                </View>
             </View>
         )
     }
@@ -51,21 +53,21 @@ const styles = {
         paddingRight: 10,
         borderRadius: 2,
         overflow: 'hidden',
-        shadowOffset: { width: 0, height: 3 },
+        shadowOffset: {width: 0, height: 3},
         shadowOpacity: 0.2,
         shadowRadius: 3,
         elevation: 3,
     },
     nameStyles: {
         alignSelf: 'center',
-        fontSize: 15,
+        fontSize: 20,
         lineHeight: 20,
         color: 'white',
         paddingBottom: 7
     },
     scoreStyles: {
         alignSelf: 'center',
-        fontSize: 19,
+        fontSize: 22,
         lineHeight: 24,
         color: 'white',
         paddingBottom: 7

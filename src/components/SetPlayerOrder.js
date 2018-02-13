@@ -37,10 +37,19 @@ class SetPlayerOrder extends Component {
 
     onReadyButtonPress() {
         const newRoster = {};
-        for (let i = 0; i < this.state.sortOrder.length; i++) {
-            newRoster[i] = this.state.roster[this.state.sortOrder[i]];
+        if (this.state.sortOrder.length > 0) {
+            for (let i = 0; i < this.state.sortOrder.length; i++) {
+                newRoster[i] = this.state.roster[this.state.sortOrder[i]];
+            }
+            this.props.updatePlayerOrderList(newRoster);
+        } else {
+            for (let attr in this.state.roster) {
+                if (this.state.roster.hasOwnProperty(attr)) {
+                    newRoster[attr] = this.state.roster[attr];
+                }
+            }
+            this.props.updatePlayerOrderList(newRoster);
         }
-        this.props.updatePlayerOrderList(newRoster);
         this.props.navigation.navigate('Scoreboard');
     }
 

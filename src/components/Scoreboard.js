@@ -44,7 +44,7 @@ class Scoreboard extends Component {
     }
 
     renderRow({item}) {
-        return <ScoreboardListItem dropPlayer={this.dropPlayer.bind(this)} player={item}/>;
+        return <ScoreboardListItem player={item}/>;
     }
 
     render() {
@@ -77,14 +77,14 @@ class Scoreboard extends Component {
                 <View style={{flexDirection: 'row'}}>
                     <Button
                         buttonStyleDyn={{flex: 1}}
-                        textStyleDyn={{fontSize: 18}}
+                        textStyleDyn={{fontSize: 22}}
                         onPress={() => {
                         }}>
                         Farkel
                     </Button>
                     <Button
                         buttonStyleDyn={{flex: 1}}
-                        textStyleDyn={{fontSize: 18}}
+                        textStyleDyn={{fontSize: 22}}
                         onPress={() => {
                         }}>
                         Score It

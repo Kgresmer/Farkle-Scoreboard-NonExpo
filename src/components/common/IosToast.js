@@ -3,46 +3,44 @@ import {Text, View, Modal, StyleSheet} from 'react-native';
 
 
 const IosToast = ({children, visible}) => {
-    const {textStyles, containerStyles} = styles;
 
     return (
-        <Modal
-            visible={visible}
-            transparent
-            animationType="slide"
-            onRequestClose={() => {}}
-          >
-          <View style={containerStyles}>
-              <Text style={textStyles}>{children}</Text>
-          </View>
-      </Modal>
+        <View style={{
+            flex: 1,
+            justifyContent: 'center',
+        }}>
+            <Modal
+                visible={visible}
+                transparent
+                animationType="slide"
+                onRequestClose={() => {}}
+            >
+                <View style={styles.containerStyles}>
+                    <Text style={styles.textStyles}>{children}</Text>
+                </View>
+            </Modal>
+        </View>
     );
 };
 
 const styles = StyleSheet.create({
-    cardStyles: {
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginLeft: 35,
-        marginRight: 35,
-        borderRadius: 5,
-        overflow: 'hidden'
-    },
     textStyles: {
-        flex: 1,
-        fontSize: 18,
-        borderRadius: 15,
-        textAlign: 'center',
+        fontSize: 14,
+        borderRadius: 20,
+        overflow: 'hidden',
         lineHeight: 25,
-        marginBottom: 45,
+        textAlign: 'center',
         backgroundColor: 'white',
         padding: 15,
-        color: 'black'
+        color: 'black',
+        marginBottom: 35,
+        width: 150,
+        height: 55,
     },
+
     containerStyles: {
-        position: 'relative',
         flex: 1,
-        justifyContent: 'center',
+        justifyContent: 'flex-end',
         alignItems: 'center'
     }
 });

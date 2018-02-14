@@ -1,4 +1,4 @@
-package com.farkle scoreboard;
+package com.farklescoreboard;
 
 import android.app.Application;
 

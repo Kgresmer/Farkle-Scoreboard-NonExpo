@@ -16,11 +16,11 @@
 #define TIMEOUT_SECONDS 600
 #define TEXT_TO_LOOK_FOR @"Welcome to React Native!"
 
-@interface Farkle ScoreboardTests : XCTestCase
+@interface FarkleScoreboardTests : XCTestCase
 
 @end
 
-@implementation Farkle ScoreboardTests
+@implementation FarkleScoreboardTests
 
 - (BOOL)findSubviewInView:(UIView *)view matching:(BOOL(^)(UIView *view))test
 {

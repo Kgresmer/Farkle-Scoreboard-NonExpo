@@ -3,14 +3,13 @@ import {Button} from "../common/index";
 import {connect} from 'react-redux';
 import { FlatList, Text, View} from "react-native";
 import {BackHandler, ToastAndroid, StyleSheet} from "react-native";
-import {Confirm, Input} from "./common";
+import {Confirm, Input} from "../common";
 import ScoreboardListItem from "./ScoreboardListItem";
 import ScoreboardTitle from "./ScoreboardTitle";
 
 class Scoreboard extends Component {
     static navigationOptions = {
-        headerLeft: null,
-        headerTitle: <ScoreboardTitle/>
+        header: <ScoreboardTitle/>
     };
 
     state = {showModal: false};
@@ -28,10 +27,12 @@ class Scoreboard extends Component {
     }
 
     componentWillMount() {
+        console.log(this.props)
         this.createDataSource(this.props.roster, this.props.sortedPlayerList);
     }
 
     componentWillReceiveProps(nextProps) {
+        console.log(nextProps)
         this.createDataSource(nextProps.roster, nextProps.sortedPlayerList);
     }
 
@@ -40,6 +41,7 @@ class Scoreboard extends Component {
         for (let i = 0; i < roster.length; i++) {
             dataSource[i] = sortedPlayerListObject[i];
         }
+        console.log(dataSource)
         this.dataSource = dataSource;
     }
 
@@ -138,6 +140,7 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state) => {
+    console.log(state)
     return {
         roster: state.player.roster,
         sortedPlayerList: state.sortOrder.sortedPlayerList

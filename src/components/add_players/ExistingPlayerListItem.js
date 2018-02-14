@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import {Text, ToastAndroid, View} from "react-native";
-import {Button, Confirm} from "./common";
+import {Button, Confirm} from "../common";
 
 
 class ExistingPlayerListItem extends Component {
@@ -51,21 +51,18 @@ class ExistingPlayerListItem extends Component {
             <View style={styles.container}>
                 <Text style={styles.nameStyles}>
                     {player.name}{"\n"}
-
+                    <Text style={styles.textStyles}>
+                        Wins: {player.wins} Losses: {player.losses}{"\n"}
+                        Best Score: {player.bestScore} Worst Score: {player.worstScore}
+                    </Text>
                 </Text>
                 <View style={{flexDirection: 'column', justifyContent: 'center', alignItems: 'flex-end'}}>
-                    {this.checkIfPlayerIsOnRoster()}
                     <Button
                         buttonStyleDyn={styles.removeButtonStyle}
                         onPress={this.deletePlayer.bind(this)}>
                         x
                     </Button>
-                </View>
-                <View style={{flexDirection: 'row'}}>
-                    <Text style={styles.textStyles}>
-                        Wins: {player.wins} Losses: {player.losses}{"\n"}
-                        Best Score: {player.bestScore} Worst Score: {player.worstScore}
-                    </Text>
+                    {this.checkIfPlayerIsOnRoster()}
                 </View>
                 <Confirm
                     visible={this.state.showModal}
@@ -93,7 +90,7 @@ const styles = {
         paddingRight: 10,
         borderRadius: 2,
         overflow: 'hidden',
-        shadowOffset: { width: 0, height: 3 },
+        shadowOffset: {width: 0, height: 3},
         shadowOpacity: 0.2,
         shadowRadius: 3,
         elevation: 3,
@@ -112,20 +109,20 @@ const styles = {
     },
     removeButtonStyle: {
         alignSelf: 'flex-end',
-        backgroundColor: '#C70039',
-        width: 30,
+        backgroundColor: 'rgba(255,55,55,0.9)',
+        width: 50,
         marginTop: 1
     },
     addButtonStyle: {
         alignSelf: 'center',
         backgroundColor: '#89ae6d',
-        width: 90,
+        width: 95,
         marginTop: 1
     },
     dropButtonStyle: {
         alignSelf: 'center',
         backgroundColor: '#ea651d',
-        width: 90,
+        width: 95,
         marginTop: 1
     },
 };

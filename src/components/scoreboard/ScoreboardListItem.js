@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {Text, View} from "react-native";
+import {Image, Text, View} from "react-native";
 import {Icon} from 'react-native-elements';
 
 
@@ -18,19 +18,25 @@ class ScoreboardListItem extends Component {
                 </Text>
 
                 <View style={{flexDirection: 'row'}}>
-                    <Icon
-                        raised
-                        size={10}
-                        name="times-circle"
-                        type="font-awesome"
-                        color="#C70039"
+                    <Text
+                        style={{
+                            width: 30,
+                            height: 30,
+                            backgroundColor: 'red',
+                            borderWidth: 2,
+                            marginRight: 4,
+                            borderRadius: 15,
+                        }}
                     />
-                    <Icon
-                        raised
-                        size={10}
-                        name="times-circle"
-                        type="font-awesome"
-                        color="#C70039"
+                    <Text
+                        style={{
+                            width: 30,
+                            height: 30,
+                            backgroundColor: 'red',
+                            borderWidth: 2,
+                            marginRight: 10,
+                            borderRadius: 15,
+                        }}
                     />
                 </View>
             </View>

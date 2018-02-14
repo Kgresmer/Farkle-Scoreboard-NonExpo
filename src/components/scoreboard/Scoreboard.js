@@ -70,7 +70,7 @@ class Scoreboard extends Component {
                             inputDynStyle={styles.inputDynStyle}
                             maxLength={6}
                             keyboardType="default"
-                            placeholder="Name"
+                            placeholder=" 350"
                             onChangeText={() => {
                             }}
                         />
@@ -114,7 +114,7 @@ const styles = StyleSheet.create({
         paddingBottom: 10,
         paddingLeft: 5,
         paddingRight: 5,
-        backgroundColor: '#0b7a75'
+        backgroundColor: 'white'
     },
     displaySection: {
         flex: 1,
@@ -123,19 +123,20 @@ const styles = StyleSheet.create({
     },
     inputCard: {
         flex: 2,
-        padding: 8,
+        padding: 12,
         borderWidth: 0,
         height: 70,
+        borderRadius: 5,
         backgroundColor: '#05a8aa'
     },
     inputDynStyle: {
-        fontSize: 16,
-        lineHeight: 21,
+        fontSize: 20,
+        lineHeight: 27,
     },
     playerNameStyle: {
-        fontSize: 18,
-        lineHeight: 23,
-        color: 'white'
+        fontSize: 25,
+        lineHeight: 32,
+        color: 'black'
     }
 });
 

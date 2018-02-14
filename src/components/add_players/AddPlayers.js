@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Button} from "../../components/common";
-import {StyleSheet, View, FlatList, Text, BackHandler, ToastAndroid} from "react-native";
+import {StyleSheet, View, FlatList, Text, BackHandler, ToastAndroid, Platform} from "react-native";
 import PlayerListItem from "./PlayerListItem";
 import AddNewPlayer from "./AddNewPlayer";
 import {connect} from 'react-redux';
@@ -21,12 +21,19 @@ class AddPlayers extends Component {
         headerLeft: null
     };
 
-    state = {showNewPlayerModal: false};
+    state = {showNewPlayerModal: false, showIOSToast: false};
 
     addNewPlayer(name) {
         this.props.playerCreated(name);
         this.closeAddNewPlayerModal();
-        ToastAndroid.show('Player Added', ToastAndroid.SHORT);
+        if (Platform.OS === "ios") {
+            this.setState({showIOSToast: true, showNewPlayerModal: false});
+            setTimeout(() => {
+                this.setState({showIOSToast: false, showNewPlayerModal: false});
+            }, 1500);
+        } else {
+            ToastAndroid.show('Player Added', ToastAndroid.SHORT);
+        }
     };
 
     dropPlayer(id) {
@@ -145,6 +152,9 @@ class AddPlayers extends Component {
                     closeModal={this.closeAddNewPlayerModal.bind(this)}
                     addPlayer={this.addNewPlayer.bind(this)}
                 />
+                <IosToast visible={this.state.showIOSToast}>
+                    Player Created
+                </IosToast>
             </View>
         )
     }

@@ -110,7 +110,8 @@ const styles = StyleSheet.create({
     inputCard: {
         marginBottom: 10,
         padding: 8,
-        borderWidth: 0,
+        borderWidth: 1,
+        borderColor: 'white',
         width: Dimensions.get('window').width * 0.7
     },
     textStyles: {

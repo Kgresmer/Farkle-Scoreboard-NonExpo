@@ -5,6 +5,7 @@ import PlayerListItem from "./PlayerListItem";
 import AddNewPlayer from "./AddNewPlayer";
 import {connect} from 'react-redux';
 import {removePlayerFromRoster, playerCreated} from "../../actions";
+import {IosToast} from "../common/IosToast";
 
 class AddPlayers extends Component {
     static navigationOptions = {
@@ -84,6 +85,16 @@ class AddPlayers extends Component {
         return <PlayerListItem dropPlayer={this.dropPlayer.bind(this)} player={item}/>;
     }
 
+    showIosToast() {
+        if (this.state.showIOSToast) {
+            return (
+                <IosToast visible={this.state.showIOSToast}>
+                    Player Created
+                </IosToast>
+            )
+        }
+    }
+
     checkForEmptyRoster() {
         if (this.props.roster.length > 0) {
             return (<FlatList
@@ -152,9 +163,7 @@ class AddPlayers extends Component {
                     closeModal={this.closeAddNewPlayerModal.bind(this)}
                     addPlayer={this.addNewPlayer.bind(this)}
                 />
-                <IosToast visible={this.state.showIOSToast}>
-                    Player Created
-                </IosToast>
+                {this.showIosToast()}
             </View>
         )
     }

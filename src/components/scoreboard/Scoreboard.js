@@ -12,7 +12,7 @@ class Scoreboard extends Component {
         header: <ScoreboardTitle/>
     };
 
-    state = {showModal: false};
+    state = {showModal: false, activePlayer: null};
 
     componentDidMount() {
         BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
@@ -28,21 +28,19 @@ class Scoreboard extends Component {
 
     componentWillMount() {
         console.log(this.props)
-        this.createDataSource(this.props.roster, this.props.sortedPlayerList);
+        this.dataSource = this.props.currentGamePlayersAndScores;
+        this.setState({showModal: false, activePlayer: this.props.currentGamePlayersAndScores['0']})
     }
 
     componentWillReceiveProps(nextProps) {
         console.log(nextProps)
-        this.createDataSource(nextProps.roster, nextProps.sortedPlayerList);
-    }
+        this.dataSource = nextProps.currentGamePlayersAndScores;
+        const activePlayer = nextProps.currentGamePlayersAndScores.find((player) => {
+            return player.isActive === true;
+        });
+        console.log(activePlayer);
+        this.setState({showModal: false, activePlayer})
 
-    createDataSource(roster, sortedPlayerListObject) {
-        const dataSource = [];
-        for (let i = 0; i < roster.length; i++) {
-            dataSource[i] = sortedPlayerListObject[i];
-        }
-        console.log(dataSource)
-        this.dataSource = dataSource;
     }
 
     renderRow({item}) {
@@ -60,7 +58,7 @@ class Scoreboard extends Component {
                 </View>
                 <View style={{flexDirection: 'row'}}>
                     <View style={styles.displaySection}>
-                        <Text style={styles.playerNameStyle}>Kevin's Turn</Text>
+                        <Text style={styles.playerNameStyle}>{this.state.activePlayer.name}'s Turn</Text>
                     </View>
                 </View>
                 <View style={{flexDirection: 'row'}}>
@@ -143,8 +141,7 @@ const styles = StyleSheet.create({
 const mapStateToProps = (state) => {
     console.log(state)
     return {
-        roster: state.player.roster,
-        sortedPlayerList: state.sortOrder.sortedPlayerList
+        currentGamePlayersAndScores: state.game.currentGamePlayersAndScores
     };
 };
 

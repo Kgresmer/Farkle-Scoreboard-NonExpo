@@ -6,6 +6,7 @@ import {BackHandler, ToastAndroid, StyleSheet} from "react-native";
 import {Confirm, Input} from "../common";
 import ScoreboardListItem from "./ScoreboardListItem";
 import ScoreboardTitle from "./ScoreboardTitle";
+import {updateRoundScore, addRoundScoreToActivePlayerScore} from "../../actions/ScoreboardActions";
 
 class Scoreboard extends Component {
     static navigationOptions = {
@@ -26,6 +27,10 @@ class Scoreboard extends Component {
         return true;
     }
 
+    onInputChange(value) {
+        this.props.updateRoundScore(value);
+    }
+
     componentWillMount() {
         console.log(this.props)
         this.dataSource = this.props.currentGamePlayersAndScores;
@@ -40,7 +45,10 @@ class Scoreboard extends Component {
         });
         console.log(activePlayer);
         this.setState({showModal: false, activePlayer})
+    }
 
+    onScoreItButtonPress() {
+        this.addRoundScoreToActivePlayerScore(this.state.activePlayer.id);
     }
 
     renderRow({item}) {
@@ -67,10 +75,9 @@ class Scoreboard extends Component {
                             label=""
                             inputDynStyle={styles.inputDynStyle}
                             maxLength={6}
-                            keyboardType="default"
+                            keyboardType="numeric"
                             placeholder=" 350"
-                            onChangeText={() => {
-                            }}
+                            onChangeText={(value) => this.onInputChange(value)}
                         />
                     </View>
                 </View>
@@ -85,8 +92,7 @@ class Scoreboard extends Component {
                     <Button
                         buttonStyleDyn={{flex: 1, backgroundColor: '#05a8aa'}}
                         textStyleDyn={{fontSize: 22}}
-                        onPress={() => {
-                        }}>
+                        onPress={this.onScoreItButtonPress.bind(this)}>
                         Score It
                     </Button>
                 </View>
@@ -139,10 +145,13 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state) => {
-    console.log(state)
     return {
         currentGamePlayersAndScores: state.game.currentGamePlayersAndScores
     };
 };
 
-export default connect(mapStateToProps, {})(Scoreboard);
+export default connect(mapStateToProps,
+    {
+        updateRoundScore,
+        addRoundScoreToActivePlayerScore
+    })(Scoreboard);

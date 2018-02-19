@@ -53,7 +53,6 @@ class ScoreboardListItem extends Component {
         )
     }
 }
-}
 
 const styles = {
     itemContainer: {

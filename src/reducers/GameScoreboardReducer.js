@@ -1,6 +1,13 @@
-import { SEND_PLAYER_ORDER_LIST} from "../actions/types";
+import {
+    ADD_ROUND_SCORE_TO_ACTIVE_PLAYER,
+    SEND_PLAYER_ORDER_LIST,
+    UPDATE_ROUND_SCORE
+} from "../actions/types";
+
 const INITIAL_STATE = {
-    currentGamePlayersAndScores: []
+    currentGamePlayersAndScores: [],
+    roundScore: null,
+
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -13,6 +20,7 @@ export default (state = INITIAL_STATE, action) => {
                     currentGamePlayersAndScores[index] = action.payload[index];
                     currentGamePlayersAndScores[index].farkles = 0;
                     currentGamePlayersAndScores[index].score = 0;
+                    currentGamePlayersAndScores[index].turns = 0;
                     console.log(index === '0');
                     index === '0' ? currentGamePlayersAndScores[index].isActive = true : currentGamePlayersAndScores[index].isActive = false;
                 }
@@ -21,6 +29,10 @@ export default (state = INITIAL_STATE, action) => {
                 ...state,
                 currentGamePlayersAndScores: clone(currentGamePlayersAndScores)
             };
+        case UPDATE_ROUND_SCORE:
+            return {...state, roundScore: action.payload};
+        case ADD_ROUND_SCORE_TO_ACTIVE_PLAYER:
+            const activePlayer =
         default:
             return {...state};
     }

@@ -33,12 +33,14 @@ class ScoreboardListItem extends Component {
             if (player.isActive) {
                 return {
                     ...styles.itemContainer,
-                    backgroundColor: 'green'
+                    backgroundColor: '#05a8aa',
+                    borderWidth: 7,
+                    borderColor: '#ea651d',
                 };
             } else {
                 return {
                     ...styles.itemContainer,
-                    backgroundColor: '#05a8aa'
+                    backgroundColor: '#6cdeff'
                 };
             }
         }
@@ -60,6 +62,8 @@ const styles = {
         justifyContent: 'space-between',
         alignItems: 'center',
         marginTop: 5,
+        marginLeft: 10,
+        marginRight: 10,
         paddingTop: 5,
         paddingBottom: 5,
         paddingLeft: 10,

@@ -1,6 +1,11 @@
 import React, {Component} from "react";
-import {Text, View, Platform} from "react-native";
-import {Icon} from 'react-native-elements';
+import {
+    Text,
+    View,
+    Platform,
+    Image,
+    TouchableOpacity
+} from "react-native";
 
 
 class ScoreboardListItem extends Component {
@@ -8,26 +13,28 @@ class ScoreboardListItem extends Component {
     render() {
         return (
             <View style={styles.itemContainer}>
+                <View style={{flexDirection: 'row'}}>
+                    <TouchableOpacity
+                        onPress={() => {}}
+                    >
+                        <Image
+                            style={{height: 60, width: 60, marginLeft: 7}}
+                            source={require('./exit-icon.png')}
+                        />
+                    </TouchableOpacity>
+                </View>
                 <Text style={styles.nameStyles}>
                     Scoreboard
                 </Text>
                 <View style={{flexDirection: 'row'}}>
-                    <Icon
-                        raised
-                        name="plus-circle"
-                        type="font-awesome"
-                        color="#ea651d"
-                        onPress={() => {
-                        }}
-                    />
-                    <Icon
-                        raised
-                        name="book"
-                        type="font-awesome"
-                        color="#89ae6d"
-                        onPress={() => {
-                        }}
-                    />
+                    <TouchableOpacity
+                        onPress={() => {}}
+                    >
+                        <Image
+                            style={{height: 60, width: 60, marginRight: 7}}
+                            source={require('./rules-icon.png')}
+                        />
+                    </TouchableOpacity>
                 </View>
             </View>
         )

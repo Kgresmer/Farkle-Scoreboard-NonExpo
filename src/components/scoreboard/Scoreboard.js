@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Button} from "../common/index";
 import {connect} from 'react-redux';
-import { FlatList, Text, View} from "react-native";
+import {FlatList, Text, View} from "react-native";
 import {BackHandler, ToastAndroid, StyleSheet} from "react-native";
 import {Confirm, Input} from "../common";
 import ScoreboardListItem from "./ScoreboardListItem";
@@ -65,11 +65,16 @@ class Scoreboard extends Component {
                     />
                 </View>
                 <View style={{flexDirection: 'row'}}>
-                    <View style={styles.displaySection}>
-                        <Text style={styles.playerNameStyle}>{this.state.activePlayer.name}'s Turn</Text>
-                    </View>
+                    <Text style={styles.playerNameStyle}>{this.state.activePlayer.name}'s Turn</Text>
                 </View>
-                <View style={{flexDirection: 'row'}}>
+                <View style={{
+                    flexDirection: 'row',
+                    backgroundColor: 'white',
+                    borderLeftWidth: 10,
+                    borderRightWidth: 10,
+                    borderTopWidth: 2,
+                    borderColor: '#ea651d'
+                }}>
                     <View style={styles.inputCard}>
                         <Input
                             label=""
@@ -81,16 +86,23 @@ class Scoreboard extends Component {
                         />
                     </View>
                 </View>
-                <View style={{flexDirection: 'row'}}>
+                <View style={{
+                    flexDirection: 'row',
+                    backgroundColor: 'white',
+                    borderLeftWidth: 10,
+                    borderRightWidth: 10,
+                    borderBottomWidth: 10,
+                    borderColor: '#ea651d'
+                }}>
                     <Button
-                        buttonStyleDyn={{flex: 1, backgroundColor: '#05a8aa'}}
+                        buttonStyleDyn={{flex: 1, backgroundColor: '#05a8aa', padding: 5}}
                         textStyleDyn={{fontSize: 22}}
                         onPress={() => {
                         }}>
                         Farkel
                     </Button>
                     <Button
-                        buttonStyleDyn={{flex: 1, backgroundColor: '#05a8aa'}}
+                        buttonStyleDyn={{flex: 1, backgroundColor: '#05a8aa', padding: 5}}
                         textStyleDyn={{fontSize: 22}}
                         onPress={this.onScoreItButtonPress.bind(this)}>
                         Score It
@@ -98,8 +110,10 @@ class Scoreboard extends Component {
                 </View>
                 <Confirm
                     visible={this.state.showModal}
-                    onAccept={() => {}}
-                    onDecline={() => {}}
+                    onAccept={() => {
+                    }}
+                    onDecline={() => {
+                    }}
                 >
                     Are you sure you want to exit the game?{'\n'}
                     All of the scores will be reset.
@@ -115,21 +129,23 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         justifyContent: 'flex-end',
         alignItems: 'center',
-        paddingBottom: 10,
-        paddingLeft: 5,
-        paddingRight: 5,
         backgroundColor: 'white'
     },
     displaySection: {
         flex: 1,
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        paddingBottom: 5
     },
     inputCard: {
-        flex: 2,
-        padding: 12,
+        flex: 1,
+        paddingLeft: 5,
+        paddingRight: 5,
         borderWidth: 0,
         height: 70,
+        marginLeft: 7,
+        marginRight: 7,
+        marginTop: 7,
         borderRadius: 5,
         backgroundColor: '#05a8aa'
     },
@@ -138,9 +154,13 @@ const styles = StyleSheet.create({
         lineHeight: 27,
     },
     playerNameStyle: {
+        textAlign: 'center',
+        fontWeight: 'bold',
+        flex: 1,
         fontSize: 25,
-        lineHeight: 32,
-        color: 'black'
+        paddingBottom: 3,
+        color: 'white',
+        backgroundColor: '#ea651d'
     }
 });
 

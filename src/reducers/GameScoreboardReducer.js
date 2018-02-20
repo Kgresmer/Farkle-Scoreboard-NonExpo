@@ -31,8 +31,8 @@ export default (state = INITIAL_STATE, action) => {
             };
         case UPDATE_ROUND_SCORE:
             return {...state, roundScore: action.payload};
-        case ADD_ROUND_SCORE_TO_ACTIVE_PLAYER:
-            const activePlayer =
+        // case ADD_ROUND_SCORE_TO_ACTIVE_PLAYER:
+        //     const activePlayer =
         default:
             return {...state};
     }

@@ -12,14 +12,23 @@ class ScoreboardListItem extends Component {
         if (this.props.player.farkles === 2) {
             return (
                 <View style={styles.farkelsContainer}>
-                    <Text style={styles.farkelMarkerStyles}/>
-                    <Text style={styles.farkelMarkerStyles}/>
+                    <Image
+                        style={styles.farkelMarkerStyles}
+                        source={require('./farkle-icon.png')}
+                    />
+                    <Image
+                        style={styles.farkelMarkerStyles}
+                        source={require('./farkle-icon.png')}
+                    />
                 </View>
             )
         } else if (this.props.player.farkles === 1) {
             return (
                 <View style={styles.farkelsContainer}>
-                    <Text style={styles.farkelMarkerStyles}/>
+                    <Image
+                        style={styles.farkelMarkerStyles}
+                        source={require('./farkle-icon.png')}
+                    />
                 </View>
             )
         }
@@ -93,12 +102,8 @@ const styles = {
         paddingBottom: 7
     },
     farkelMarkerStyles: {
-        width: 30,
-        height: 30,
-        backgroundColor: 'red',
-        borderWidth: 2,
-        marginRight: 4,
-        borderRadius: 15,
+        width: 35,
+        height: 35,
     },
     removeButtonStyle: {
         alignSelf: 'center',

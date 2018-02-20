@@ -109,7 +109,7 @@ const styles = {
     },
     removeButtonStyle: {
         alignSelf: 'flex-end',
-        backgroundColor: 'rgba(255,55,55,0.9)',
+        backgroundColor: '#b01005',
         width: 50,
         marginTop: 1
     },

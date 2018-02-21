@@ -6,7 +6,7 @@ import {BackHandler, ToastAndroid, StyleSheet} from "react-native";
 import {Confirm, Input} from "../common";
 import ScoreboardListItem from "./ScoreboardListItem";
 import ScoreboardTitle from "./ScoreboardTitle";
-import {updateRoundScore, addRoundScoreToActivePlayerScore} from "../../actions/ScoreboardActions";
+import {updateRoundScore, addRoundScoreToActivePlayerScore, addFarkleToActivePlayer} from "../../actions/ScoreboardActions";
 
 class Scoreboard extends Component {
     static navigationOptions = {
@@ -34,7 +34,7 @@ class Scoreboard extends Component {
     componentWillMount() {
         console.log(this.props)
         this.dataSource = this.props.currentGamePlayersAndScores;
-        this.setState({showModal: false, activePlayer: this.props.currentGamePlayersAndScores['0']})
+        this.setState({showModal: false, activePlayer: this.props.currentGamePlayersAndScores.find((player) => player.isActive === true)})
     }
 
     componentWillReceiveProps(nextProps) {
@@ -49,6 +49,10 @@ class Scoreboard extends Component {
 
     onScoreItButtonPress() {
         this.addRoundScoreToActivePlayerScore(this.state.activePlayer.id);
+    }
+
+    onFarkleButtonPress() {
+        this.addFarkleToActivePlayer(this.state.activePlayer.id);
     }
 
     renderRow({item}) {
@@ -97,8 +101,7 @@ class Scoreboard extends Component {
                     <Button
                         buttonStyleDyn={{flex: 1, backgroundColor: '#05a8aa', padding: 5}}
                         textStyleDyn={{fontSize: 22}}
-                        onPress={() => {
-                        }}>
+                        onPress={this.onFarkleButtonPress.bind(this)}>
                         Farkel
                     </Button>
                     <Button
@@ -173,5 +176,6 @@ const mapStateToProps = (state) => {
 export default connect(mapStateToProps,
     {
         updateRoundScore,
-        addRoundScoreToActivePlayerScore
+        addRoundScoreToActivePlayerScore,
+        addFarkleToActivePlayer
     })(Scoreboard);

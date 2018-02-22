@@ -77,6 +77,7 @@ class AddNewPlayer extends Component {
                                 <Input
                                     label=""
                                     maxLength={15}
+                                    inputDynStyle={styles.inputDynStyle}
                                     keyboardType="default"
                                     placeholder="Name"
                                     onChangeText={(value) => this.onInputChange(value)}
@@ -113,6 +114,10 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: 'white',
         width: Dimensions.get('window').width * 0.7
+    },
+    inputDynStyle: {
+        fontSize: 20,
+        lineHeight: 27,
     },
     textStyles: {
         flex: 1,

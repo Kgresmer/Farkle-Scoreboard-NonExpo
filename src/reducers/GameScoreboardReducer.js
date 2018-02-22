@@ -7,9 +7,10 @@ import {
 
 const INITIAL_STATE = {
     currentGamePlayersAndScores: [],
-    roundScore: null,
+    roundScore: '',
     round: {},
-    lastRound: false
+    lastRound: false,
+    totalPlayers: 0
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -66,53 +67,79 @@ export default (state = INITIAL_STATE, action) => {
         }
     }
 
+    function makeNextPlayerActive(turnOrder) {
+        console.log(state.currentGamePlayersAndScores);
+        console.log(turnOrder);
+        console.log(state.currentGamePlayersAndScores[turnOrder]);
+        if (turnOrder === state.totalPlayers) {
+            state.currentGamePlayersAndScores[0].isActive = true;
+        } else {
+            state.currentGamePlayersAndScores[turnOrder].isActive = true;
+        }
+    }
+
+    const activePlayer = state.currentGamePlayersAndScores.find((player) => player.id === action.payload);
+
     switch (action.type) {
         case SEND_PLAYER_ORDER_LIST:
             console.log('send player list reducer');
             const currentGamePlayersAndScores = [];
+            let lastIndex = 1;
             for (let index in action.payload) {
                 if (action.payload.hasOwnProperty(index)) {
                     currentGamePlayersAndScores[index] = action.payload[index];
                     currentGamePlayersAndScores[index].farkles = 0;
                     currentGamePlayersAndScores[index].score = 0;
                     currentGamePlayersAndScores[index].turns = 0;
+                    currentGamePlayersAndScores[index].turnOrder = +index + 1;
 
                     // Set the first player to be active
                     index === '0' ? currentGamePlayersAndScores[index].isActive = true : currentGamePlayersAndScores[index].isActive = false;
-
+                    lastIndex = index;
                     // create a round object to keep track of who has gone this round.
                     state.round[currentGamePlayersAndScores[index].name] = 0;
                 }
             }
             return {
                 ...state,
+                totalPlayers: +lastIndex + 1,
                 currentGamePlayersAndScores: clone(currentGamePlayersAndScores)
             };
+
         case UPDATE_ROUND_SCORE:
             return {...state, roundScore: action.payload};
+
         case ADD_ROUND_SCORE_TO_ACTIVE_PLAYER:
-            const activePlayer = state.currentGamePlayersAndScores.find((player) => player.id === action.payload);
-            activePlayer.score += state.roundScore;
+            activePlayer.score += +state.roundScore;
+            activePlayer.isActive = false;
+            makeNextPlayerActive(activePlayer.turnOrder);
             state.lastRound = checkForOverTenThousand(activePlayer);
             updateRound(activePlayer);
+            console.log(state);
             return {
+                ...state,
                 lastRound: state.lastRound,
-                currentGamePlayersAndScores: clone(currentGamePlayersAndScores),
-                roundScore: 0,
+                currentGamePlayersAndScores: clone(state.currentGamePlayersAndScores),
+                roundScore: '',
                 round: clone(state.round)
             };
+
         case ADD_FARKLE_TO_ACTIVE_PLAYER:
-            const activePlayer = state.currentGamePlayersAndScores.find((player) => player.id === action.payload);
             // update num of farkles
             activePlayer.farkles += 1;
+            activePlayer.isActive = false;
+            makeNextPlayerActive(activePlayer.turnOrder);
+
             // check for three farkles
             checkForThreeFarkles(activePlayer);
             // update round object to say this player has gone this round
             updateRound(activePlayer);
+            console.log(state.currentGamePlayersAndScores);
             return {
+                ...state,
                 lastRound: false,
-                currentGamePlayersAndScores: clone(currentGamePlayersAndScores),
-                roundScore: 0,
+                currentGamePlayersAndScores: clone(state.currentGamePlayersAndScores),
+                roundScore: '',
                 round: clone(state.round)
             };
         default:

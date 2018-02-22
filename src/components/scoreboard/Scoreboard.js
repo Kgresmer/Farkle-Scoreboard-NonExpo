@@ -1,12 +1,21 @@
 import React, {Component} from 'react';
 import {Button} from "../common/index";
 import {connect} from 'react-redux';
-import {FlatList, Text, View} from "react-native";
+import {FlatList,
+    Keyboard,
+    Text,
+    TouchableWithoutFeedback,
+    View
+} from "react-native";
 import {BackHandler, ToastAndroid, StyleSheet} from "react-native";
 import {Confirm, Input} from "../common";
 import ScoreboardListItem from "./ScoreboardListItem";
 import ScoreboardTitle from "./ScoreboardTitle";
-import {updateRoundScore, addRoundScoreToActivePlayerScore, addFarkleToActivePlayer} from "../../actions/ScoreboardActions";
+import {
+    updateRoundScore,
+    addRoundScoreToActivePlayerScore,
+    addFarkleToActivePlayer
+} from "../../actions/ScoreboardActions";
 
 class Scoreboard extends Component {
     static navigationOptions = {
@@ -34,7 +43,10 @@ class Scoreboard extends Component {
     componentWillMount() {
         console.log(this.props)
         this.dataSource = this.props.currentGamePlayersAndScores;
-        this.setState({showModal: false, activePlayer: this.props.currentGamePlayersAndScores.find((player) => player.isActive === true)})
+        this.setState({
+            showModal: false,
+            activePlayer: this.props.currentGamePlayersAndScores.find((player) => player.isActive === true)
+        })
     }
 
     componentWillReceiveProps(nextProps) {
@@ -48,11 +60,13 @@ class Scoreboard extends Component {
     }
 
     onScoreItButtonPress() {
-        this.addRoundScoreToActivePlayerScore(this.state.activePlayer.id);
+        Keyboard.dismiss();
+        this.props.addRoundScoreToActivePlayerScore(this.state.activePlayer.id);
     }
 
     onFarkleButtonPress() {
-        this.addFarkleToActivePlayer(this.state.activePlayer.id);
+        Keyboard.dismiss();
+        this.props.addFarkleToActivePlayer(this.state.activePlayer.id);
     }
 
     renderRow({item}) {
@@ -61,67 +75,70 @@ class Scoreboard extends Component {
 
     render() {
         return (
-            <View style={styles.mainContainer}>
-                <View style={{flex: 1, flexDirection: 'row'}}>
-                    <FlatList
-                        data={this.dataSource}
-                        renderItem={this.renderRow.bind(this)}
-                    />
-                </View>
-                <View style={{flexDirection: 'row'}}>
-                    <Text style={styles.playerNameStyle}>{this.state.activePlayer.name}'s Turn</Text>
-                </View>
-                <View style={{
-                    flexDirection: 'row',
-                    backgroundColor: 'white',
-                    borderLeftWidth: 10,
-                    borderRightWidth: 10,
-                    borderTopWidth: 2,
-                    borderColor: '#ea651d'
-                }}>
-                    <View style={styles.inputCard}>
-                        <Input
-                            label=""
-                            inputDynStyle={styles.inputDynStyle}
-                            maxLength={6}
-                            keyboardType="numeric"
-                            placeholder=" 350"
-                            onChangeText={(value) => this.onInputChange(value)}
+            <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+                <View style={styles.mainContainer}>
+                    <View style={{flex: 1, flexDirection: 'row'}}>
+                        <FlatList
+                            data={this.dataSource}
+                            renderItem={this.renderRow.bind(this)}
                         />
                     </View>
+                    <View style={{flexDirection: 'row'}}>
+                        <Text style={styles.playerNameStyle}>{this.state.activePlayer.name}'s Turn</Text>
+                    </View>
+                    <View style={{
+                        flexDirection: 'row',
+                        backgroundColor: 'white',
+                        borderLeftWidth: 10,
+                        borderRightWidth: 10,
+                        borderTopWidth: 2,
+                        borderColor: '#ea651d'
+                    }}>
+                        <View style={styles.inputCard}>
+                            <Input
+                                label=""
+                                inputDynStyle={styles.inputDynStyle}
+                                maxLength={6}
+                                value={this.props.roundScore}
+                                keyboardType="numeric"
+                                placeholder=" 350"
+                                onChangeText={(value) => this.onInputChange(value)}
+                            />
+                        </View>
+                    </View>
+                    <View style={{
+                        flexDirection: 'row',
+                        backgroundColor: 'white',
+                        borderLeftWidth: 10,
+                        borderRightWidth: 10,
+                        borderBottomWidth: 10,
+                        borderColor: '#ea651d'
+                    }}>
+                        <Button
+                            buttonStyleDyn={{flex: 1, backgroundColor: '#05a8aa', padding: 5}}
+                            textStyleDyn={{fontSize: 22}}
+                            onPress={this.onFarkleButtonPress.bind(this)}>
+                            Farkel
+                        </Button>
+                        <Button
+                            buttonStyleDyn={{flex: 1, backgroundColor: '#05a8aa', padding: 5}}
+                            textStyleDyn={{fontSize: 22}}
+                            onPress={this.onScoreItButtonPress.bind(this)}>
+                            Score It
+                        </Button>
+                    </View>
+                    <Confirm
+                        visible={this.state.showModal}
+                        onAccept={() => {
+                        }}
+                        onDecline={() => {
+                        }}
+                    >
+                        Are you sure you want to exit the game?{'\n'}
+                        All of the scores will be reset.
+                    </Confirm>
                 </View>
-                <View style={{
-                    flexDirection: 'row',
-                    backgroundColor: 'white',
-                    borderLeftWidth: 10,
-                    borderRightWidth: 10,
-                    borderBottomWidth: 10,
-                    borderColor: '#ea651d'
-                }}>
-                    <Button
-                        buttonStyleDyn={{flex: 1, backgroundColor: '#05a8aa', padding: 5}}
-                        textStyleDyn={{fontSize: 22}}
-                        onPress={this.onFarkleButtonPress.bind(this)}>
-                        Farkel
-                    </Button>
-                    <Button
-                        buttonStyleDyn={{flex: 1, backgroundColor: '#05a8aa', padding: 5}}
-                        textStyleDyn={{fontSize: 22}}
-                        onPress={this.onScoreItButtonPress.bind(this)}>
-                        Score It
-                    </Button>
-                </View>
-                <Confirm
-                    visible={this.state.showModal}
-                    onAccept={() => {
-                    }}
-                    onDecline={() => {
-                    }}
-                >
-                    Are you sure you want to exit the game?{'\n'}
-                    All of the scores will be reset.
-                </Confirm>
-            </View>
+            </TouchableWithoutFeedback>
         )
     }
 }
@@ -169,7 +186,8 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state) => {
     return {
-        currentGamePlayersAndScores: state.game.currentGamePlayersAndScores
+        currentGamePlayersAndScores: state.game.currentGamePlayersAndScores,
+        roundScore: state.game.roundScore + ''
     };
 };
 

@@ -7,7 +7,7 @@ import {
 export const updateRoundScore = (score) => {
     return {
         type: UPDATE_ROUND_SCORE,
-        payload: {score}
+        payload: score
     };
 };
 

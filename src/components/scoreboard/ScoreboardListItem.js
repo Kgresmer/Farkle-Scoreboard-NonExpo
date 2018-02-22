@@ -14,11 +14,11 @@ class ScoreboardListItem extends Component {
                 <View style={styles.farkelsContainer}>
                     <Image
                         style={styles.farkelMarkerStyles}
-                        source={require('./farkle-icon.png')}
+                        source={require('./farkleicon.png')}
                     />
                     <Image
                         style={styles.farkelMarkerStyles}
-                        source={require('./farkle-icon.png')}
+                        source={require('./farkleicon.png')}
                     />
                 </View>
             )
@@ -27,7 +27,7 @@ class ScoreboardListItem extends Component {
                 <View style={styles.farkelsContainer}>
                     <Image
                         style={styles.farkelMarkerStyles}
-                        source={require('./farkle-icon.png')}
+                        source={require('./farkleicon.png')}
                     />
                 </View>
             )

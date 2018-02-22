@@ -162,7 +162,7 @@ const styles = StyleSheet.create({
         paddingLeft: 5,
         paddingRight: 5,
         borderWidth: 0,
-        height: 70,
+        height: 60,
         marginLeft: 7,
         marginRight: 7,
         marginTop: 7,
@@ -170,6 +170,8 @@ const styles = StyleSheet.create({
         backgroundColor: '#05a8aa'
     },
     inputDynStyle: {
+        padding: 0,
+        paddingBottom: 10,
         fontSize: 20,
         lineHeight: 27,
     },

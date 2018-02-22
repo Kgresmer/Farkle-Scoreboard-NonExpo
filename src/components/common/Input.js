@@ -12,7 +12,7 @@ const Input = (
         inputDynStyle,
         maxLength
     }) => {
-    const { inputStyle, labelStyle, containerStyle } = styles;
+    const { inputStyle, containerStyle } = styles;
     return (
         <View style={[containerStyle, style]}>
             <TextInput

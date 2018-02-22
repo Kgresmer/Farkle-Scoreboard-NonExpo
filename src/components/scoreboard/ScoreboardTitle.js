@@ -19,7 +19,7 @@ class ScoreboardListItem extends Component {
                     >
                         <Image
                             style={{height: 60, width: 60, marginLeft: 7}}
-                            source={require('./exit-icon.png')}
+                            source={require('./exiticon.png')}
                         />
                     </TouchableOpacity>
                 </View>
@@ -32,7 +32,7 @@ class ScoreboardListItem extends Component {
                     >
                         <Image
                             style={{height: 60, width: 60, marginRight: 7}}
-                            source={require('./rules-icon.png')}
+                            source={require('./rulesicon.png')}
                         />
                     </TouchableOpacity>
                 </View>

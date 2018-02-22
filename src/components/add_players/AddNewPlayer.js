@@ -110,14 +110,18 @@ const styles = StyleSheet.create({
     },
     inputCard: {
         marginBottom: 10,
-        padding: 8,
+        padding: 5,
+        justifyContent: 'flex-end',
+        alignItems: 'flex-end',
         borderWidth: 1,
         borderColor: 'white',
         width: Dimensions.get('window').width * 0.7
     },
     inputDynStyle: {
+        padding: 0,
+        height: 45,
         fontSize: 20,
-        lineHeight: 27,
+        lineHeight: 30,
     },
     textStyles: {
         flex: 1,

@@ -9,7 +9,6 @@ import {
 import {Confirm} from "../common/Confirm";
 import {RulesModal} from "./RulesModal";
 
-
 class ScoreboardListItem extends Component {
 
     state = {showExitModal: false, showRulesModal: false};
@@ -69,7 +68,7 @@ class ScoreboardListItem extends Component {
                     Are you sure you want to exit the game?{'\n'}
                     All of the scores will be reset.
                 </Confirm>
-                <RulesModal onAccept={this.closeRulesModal.bind(this)}/>
+                <RulesModal visible={this.state.showRulesModal} onAccept={this.closeRulesModal.bind(this)}/>
             </View>
         )
     }

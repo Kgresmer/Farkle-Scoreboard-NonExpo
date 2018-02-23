@@ -18,8 +18,10 @@ import {
 } from "../../actions/ScoreboardActions";
 
 class Scoreboard extends Component {
-    static navigationOptions = {
-        header: <ScoreboardTitle/>
+    static navigationOptions = ({navigation}) => {
+        return {
+            header: <ScoreboardTitle navigation={navigation}/>
+        }
     };
 
     state = {activePlayer: null};

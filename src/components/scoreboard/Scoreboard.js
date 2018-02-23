@@ -8,7 +8,7 @@ import {FlatList,
     View
 } from "react-native";
 import {BackHandler, ToastAndroid, StyleSheet} from "react-native";
-import {Confirm, Input} from "../common";
+import { Input} from "../common";
 import ScoreboardListItem from "./ScoreboardListItem";
 import ScoreboardTitle from "./ScoreboardTitle";
 import {
@@ -22,7 +22,7 @@ class Scoreboard extends Component {
         header: <ScoreboardTitle/>
     };
 
-    state = {showModal: false, activePlayer: null};
+    state = {activePlayer: null};
 
     componentDidMount() {
         BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
@@ -44,7 +44,6 @@ class Scoreboard extends Component {
         console.log(this.props)
         this.dataSource = this.props.currentGamePlayersAndScores;
         this.setState({
-            showModal: false,
             activePlayer: this.props.currentGamePlayersAndScores.find((player) => player.isActive === true)
         })
     }
@@ -56,7 +55,7 @@ class Scoreboard extends Component {
             return player.isActive === true;
         });
         console.log(activePlayer);
-        this.setState({showModal: false, activePlayer})
+        this.setState({activePlayer})
     }
 
     onScoreItButtonPress() {
@@ -127,16 +126,6 @@ class Scoreboard extends Component {
                             Score It
                         </Button>
                     </View>
-                    <Confirm
-                        visible={this.state.showModal}
-                        onAccept={() => {
-                        }}
-                        onDecline={() => {
-                        }}
-                    >
-                        Are you sure you want to exit the game?{'\n'}
-                        All of the scores will be reset.
-                    </Confirm>
                 </View>
             </TouchableWithoutFeedback>
         )

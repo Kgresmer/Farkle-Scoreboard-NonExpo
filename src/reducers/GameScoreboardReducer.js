@@ -101,7 +101,9 @@ export default (state = INITIAL_STATE, action) => {
                 }
             }
             return {
-                ...state,
+                roundScore: '',
+                round: clone(state.round),
+                lastRound: false,
                 totalPlayers: +lastIndex + 1,
                 currentGamePlayersAndScores: clone(currentGamePlayersAndScores)
             };

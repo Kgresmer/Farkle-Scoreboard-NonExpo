@@ -6,16 +6,41 @@ import {
     Image,
     TouchableOpacity
 } from "react-native";
+import {Confirm} from "../common/Confirm";
+import {RulesModal} from "./RulesModal";
 
 
 class ScoreboardListItem extends Component {
+
+    state = {showExitModal: false, showRulesModal: false};
+
+    showRulesModal() {
+        this.setState({showExitModal: false, showRulesModal: true})
+    }
+
+    closeRulesModal() {
+        this.setState({showExitModal: false, showRulesModal: false})
+    }
+
+    showExitModal() {
+        this.setState({showExitModal: true, showRulesModal: false})
+    }
+
+    closeExitModal() {
+        this.setState({showExitModal: false, showRulesModal: false})
+    }
+
+    closeExitModalAndNavigateAway() {
+        this.setState({showExitModal: false, showRulesModal: false});
+        this.props.navigation.navigate('AddPlayers');
+    }
 
     render() {
         return (
             <View style={styles.itemContainer}>
                 <View style={{flexDirection: 'row'}}>
                     <TouchableOpacity
-                        onPress={() => {}}
+                        onPress={this.showExitModal.bind(this)}
                     >
                         <Image
                             style={{height: 60, width: 60, marginLeft: 7}}
@@ -28,7 +53,7 @@ class ScoreboardListItem extends Component {
                 </Text>
                 <View style={{flexDirection: 'row'}}>
                     <TouchableOpacity
-                        onPress={() => {}}
+                        onPress={this.showRulesModal.bind(this)}
                     >
                         <Image
                             style={{height: 60, width: 60, marginRight: 7}}
@@ -36,6 +61,15 @@ class ScoreboardListItem extends Component {
                         />
                     </TouchableOpacity>
                 </View>
+                <Confirm
+                    visible={this.state.showExitModal}
+                    onAccept={this.closeExitModalAndNavigateAway.bind(this)}
+                    onDecline={this.closeExitModal.bind(this)}
+                >
+                    Are you sure you want to exit the game?{'\n'}
+                    All of the scores will be reset.
+                </Confirm>
+                <RulesModal onAccept={this.closeRulesModal.bind(this)}/>
             </View>
         )
     }

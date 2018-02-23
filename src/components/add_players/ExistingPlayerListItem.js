@@ -65,7 +65,7 @@ class ExistingPlayerListItem extends Component {
                     {this.checkIfPlayerIsOnRoster()}
                 </View>
                 <Confirm
-                    visible={this.state.showModal}
+                    visible={this.state.showExitModal}
                     onAccept={this.onAccept.bind(this)}
                     onDecline={this.onDecline.bind(this)}
                 >

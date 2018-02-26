@@ -130,6 +130,19 @@ class AddPlayers extends Component {
         }
     }
 
+    showReadyButton() {
+        if (this.props.roster.length > 0) {
+            return (
+                <Button
+                    textStyleDyn={styles.readyButtonTextStyle}
+                    buttonStyleDyn={styles.readyButtonStyle}
+                    onPress={this.onReadyButtonPress.bind(this)}>
+                    Ready!
+                </Button>
+            );
+        }
+    }
+
     render() {
         return (
             <View style={styles.mainContainer}>
@@ -150,12 +163,7 @@ class AddPlayers extends Component {
                 </View>
                 <View style={{flexDirection: 'row'}}>
                     <View style={{flex: 1}}>
-                        <Button
-                            textStyleDyn={styles.readyButtonTextStyle}
-                            buttonStyleDyn={styles.readyButtonStyle}
-                            onPress={this.onReadyButtonPress.bind(this)}>
-                            Ready!
-                        </Button>
+                        {this.showReadyButton()}
                     </View>
                 </View>
                 <AddNewPlayer

@@ -10,7 +10,8 @@ import {
 const INITIAL_STATE = {
     playerList: [],
     roster: [],
-    playerName: ''
+    playerName: '',
+    errorMessage: ''
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -29,8 +30,18 @@ export default (state = INITIAL_STATE, action) => {
                 }
             }
         case PLAYER_CREATED:
-            console.log('player created')
             if (action.payload) {
+                const existingPlayer = state.playerList.find(
+                    (existingPlayer) => {
+                        return existingPlayer.name.toLowerCase() === action.payload.toLowerCase();
+                    });
+                if (existingPlayer) {
+                    return {
+                        ...state,
+                        errorMessage: 'That player already exists! Be original.'
+                    };
+                }
+
                 const t = new Date();
                 const newPlayer = {
                     id: t.getTime(),
@@ -47,7 +58,8 @@ export default (state = INITIAL_STATE, action) => {
             return {
                 playerList: clone(state.playerList),
                 roster: clone(state.roster),
-                playerName: ''
+                playerName: '',
+                errorMessage: ''
             };
         case PLAYER_DELETED:
             console.log('delete player');
@@ -72,7 +84,8 @@ export default (state = INITIAL_STATE, action) => {
             return {
                 playerList: clone(state.playerList),
                 roster: clone(state.roster),
-                playerName: ''
+                playerName: '',
+                errorMessage: ''
             };
         case DROP_PLAYER:
             console.log('drop player');
@@ -89,7 +102,8 @@ export default (state = INITIAL_STATE, action) => {
                 return {
                     roster: clone(state.roster),
                     playerList: clone(state.playerList),
-                    playerName: ''
+                    playerName: '',
+                    errorMessage: ''
                 };
             } else {
                 return { ...state };
@@ -103,7 +117,8 @@ export default (state = INITIAL_STATE, action) => {
             return {
                 playerList: clone(state.playerList),
                 roster: clone(state.roster),
-                playerName: ''
+                playerName: '',
+                errorMessage: ''
             };
         case REHYDRATE:
             console.log('hydrate');
@@ -119,7 +134,8 @@ export default (state = INITIAL_STATE, action) => {
                 return {
                     playerList: playerList,
                     roster: roster,
-                    playerName: ''
+                    playerName: '',
+                    errorMessage: ''
                 };
             } else {
                 return { ...state};

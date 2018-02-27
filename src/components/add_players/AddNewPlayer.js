@@ -27,7 +27,6 @@ class AddNewPlayer extends Component {
 
     addNewPlayer() {
         this.props.addPlayer(this.props.playerName);
-        this.props.closeModal();
         this.setState({errorMessage: ''});
     }
 

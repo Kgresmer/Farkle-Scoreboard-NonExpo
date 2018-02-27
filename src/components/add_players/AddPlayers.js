@@ -26,15 +26,6 @@ class AddPlayers extends Component {
 
     addNewPlayer(name) {
         this.props.playerCreated(name);
-        this.closeAddNewPlayerModal();
-        if (Platform.OS === "ios") {
-            this.setState({showIOSToast: true, showNewPlayerModal: false});
-            setTimeout(() => {
-                this.setState({showIOSToast: false, showNewPlayerModal: false});
-            }, 1500);
-        } else {
-            ToastAndroid.show('Player Added', ToastAndroid.SHORT);
-        }
     };
 
     dropPlayer(id) {
@@ -74,7 +65,28 @@ class AddPlayers extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        this.createDataSource(nextProps.roster);
+        if (nextProps.errorMessage) {
+            if (Platform.OS === "ios") {
+                this.setState({showIOSToast: true, showNewPlayerModal: false});
+                setTimeout(() => {
+                    this.setState({showIOSToast: false, showNewPlayerModal: false});
+                }, 1500);
+            } else {
+                ToastAndroid.show(nextProps.errorMessage, ToastAndroid.SHORT);
+            }
+        } else {
+            this.closeAddNewPlayerModal();
+            if (Platform.OS === "ios") {
+                this.setState({showIOSToast: true, showNewPlayerModal: false});
+                setTimeout(() => {
+                    this.setState({showIOSToast: false, showNewPlayerModal: false});
+                }, 1500);
+            } else {
+                ToastAndroid.show('Player Added', ToastAndroid.SHORT);
+            }
+            this.createDataSource(nextProps.roster);
+        }
+
     }
 
     createDataSource(players) {
@@ -85,11 +97,11 @@ class AddPlayers extends Component {
         return <PlayerListItem dropPlayer={this.dropPlayer.bind(this)} player={item}/>;
     }
 
-    showIosToast() {
+    showIosToast(toastMessage) {
         if (this.state.showIOSToast) {
             return (
                 <IosToast visible={this.state.showIOSToast}>
-                    Player Created
+                    {toastMessage}
                 </IosToast>
             )
         }
@@ -145,7 +157,6 @@ class AddPlayers extends Component {
 
     checkForMaxRosterSize() {
         if (this.props.roster.length >= 12) {
-            console.log('12 or more')
             return (
                 <Button
                     buttonStyleDyn={styles.existingButtonDisabledStyle}
@@ -155,7 +166,6 @@ class AddPlayers extends Component {
                 </Button>
             )
         } else {
-            console.log('less than 12')
             return (
                 <Button
                     buttonStyleDyn={styles.newButtonStyle}
@@ -190,7 +200,8 @@ class AddPlayers extends Component {
                     closeModal={this.closeAddNewPlayerModal.bind(this)}
                     addPlayer={this.addNewPlayer.bind(this)}
                 />
-                {this.showIosToast()}
+                {/* TODO Fix this error message */}
+                {this.showIosToast('Player Created')}
             </View>
         )
     }
@@ -234,11 +245,10 @@ const styles = StyleSheet.create({
 
 
 const mapStateToProps = (state) => {
-    console.log('map state to props')
-    console.log(state);
     return {
         roster: state.player.roster,
-        playerList: state.player.playerList
+        playerList: state.player.playerList,
+        errorMessage: state.player.errorMessage
     };
 };
 

@@ -143,6 +143,29 @@ class AddPlayers extends Component {
         }
     }
 
+    checkForMaxRosterSize() {
+        if (this.props.roster.length >= 12) {
+            console.log('12 or more')
+            return (
+                <Button
+                    buttonStyleDyn={styles.existingButtonDisabledStyle}
+                    disabled={true}
+                    onPress={this.onNewPlayerPress.bind(this)}>
+                    Add New Player
+                </Button>
+            )
+        } else {
+            console.log('less than 12')
+            return (
+                <Button
+                    buttonStyleDyn={styles.newButtonStyle}
+                    onPress={this.onNewPlayerPress.bind(this)}>
+                    Add New Player
+                </Button>
+            )
+        }
+    }
+
     render() {
         return (
             <View style={styles.mainContainer}>
@@ -154,11 +177,7 @@ class AddPlayers extends Component {
                         {this.checkForEmptyPlayerList()}
                     </View>
                     <View style={{flex: 2}}>
-                        <Button
-                            buttonStyleDyn={styles.newButtonStyle}
-                            onPress={this.onNewPlayerPress.bind(this)}>
-                            Add New Player
-                        </Button>
+                        {this.checkForMaxRosterSize()}
                     </View>
                 </View>
                 <View style={{flexDirection: 'row'}}>
@@ -175,6 +194,8 @@ class AddPlayers extends Component {
             </View>
         )
     }
+
+
 }
 
 const styles = StyleSheet.create({

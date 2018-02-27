@@ -26,6 +26,14 @@ class ExistingPlayerListItem extends Component {
                 onPress={this.dropPlayer.bind(this)}>
                 Drop
             </Button>);
+        } if (this.props.rosterLength && this.props.rosterLength >= 12) {
+            ToastAndroid.show('You have reached the max roster size', ToastAndroid.LONG);
+            return (<Button
+                disabled={true}
+                buttonStyleDyn={styles.addButtonDisabledStyle}
+                onPress={this.playerAdded.bind(this)}>
+                Add
+            </Button>);
         } else {
             return (<Button
                 buttonStyleDyn={styles.addButtonStyle}
@@ -116,6 +124,12 @@ const styles = {
     addButtonStyle: {
         alignSelf: 'center',
         backgroundColor: '#89ae6d',
+        width: 95,
+        marginTop: 1
+    },
+    addButtonDisabledStyle: {
+        alignSelf: 'center',
+        backgroundColor: 'rgba(178,196,205,0.80)',
         width: 95,
         marginTop: 1
     },
